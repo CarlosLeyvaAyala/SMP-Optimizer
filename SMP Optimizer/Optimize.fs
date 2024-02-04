@@ -43,7 +43,7 @@ let singleFile filename =
     match filename |> read |> replace |> Option.map (write id) with
     | None -> printfn "No optimizations were needed"
     | Some(Ok _) -> printfn "Optimization was successful"
-    | Some(Error e) -> printfn "Could not be optimized: %s" e
+    | Some(Error e) -> printfn "Could not be optimized:\n%s" e
 
 let directory basePath =
     let r (s: string) = s.Replace(basePath, "")
