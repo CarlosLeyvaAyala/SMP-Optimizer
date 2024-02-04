@@ -1,46 +1,31 @@
 ﻿open System
-open DMLib.String
 open DMLib.IO
+
+let banner = Display.procesedItemBanner
+
+let errorMsg msg n =
+    banner $"\"{n}\"\n\nCan not be processed because{msg}."
+
+let doProcess op n =
+    banner n
+    op n
 
 [<EntryPoint>]
 let main (args) =
     Console.Title <- "SMP Optimizer"
 
     match args with
-    | [||] ->
-        let smartassBanner t =
-            let b = "".PadRight(70, '*')
-            printfn "%s" b
-            printfn "%s" t
-            printfn "%s" b
-
-        """
-Usage: drag and drop at least one folder to this program.
-
-Try again."""
-        |> trim
-        |> smartassBanner
+    | [||] -> Display.smartassBanner ()
     | a ->
-        let p = printfn "%s"
-
-        let banner t =
-            let b = "".PadRight(90, '*')
-            p "\n"
-            p b
-            p $"Processing:\n{t}"
-            p b
-            p ""
-
         a
-        |> Array.iter (fun dir ->
-            match dir with
-            | IsDir d ->
-                banner d
-                Optimize.directory d
-            | FileExists f & (IsExtension "xml" _) ->
-                banner f
-                Optimize.singleFile f
-            | x -> banner $"{x} can not be processed.")
+        |> Array.iter (fun input ->
+            try
+                match input with
+                | IsDir d -> doProcess Optimize.directory d
+                | FileExists f & (IsExtension "xml" _) -> doProcess Optimize.singleFile f
+                | x -> errorMsg $" it is not an xml file or a folder." x
+            with e ->
+                errorMsg $":\n{e.Message}" input)
         |> ignore
 
     printfn "\nPress any key to continue..."

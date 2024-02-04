@@ -22,15 +22,6 @@ module private Helpers =
 
         (l oks, l errors)
 
-    // Displays a file list
-    let displayFileList title lst =
-        match lst with
-        | [] -> ()
-        | l ->
-            printfn "%s" title
-            "".PadRight(30, '=') |> printfn "%s"
-            l |> List.iter (printfn "%s")
-
 [<AutoOpen>]
 module private Core =
     let private change from ``to`` (filename: string, contents) =
@@ -72,8 +63,8 @@ module private Core =
         match ok, errors with
         | [], [] -> printfn "No optimizations were needed"
         | _, _ ->
-            ok |> displayFileList "The following files were successfully optimized"
-            errors |> displayFileList "Errors found while optimizing"
+            ok |> Display.fileList "The following files were successfully optimized"
+            errors |> Display.fileList "Errors found while optimizing"
 
 module Optimize =
     let singleFile = processFileWith optimization
