@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Optimize.fs" />
     <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DMLib-FSharp\DMLib-FSharp.fsproj" />
   </ItemGroup>
 
 </Project>
