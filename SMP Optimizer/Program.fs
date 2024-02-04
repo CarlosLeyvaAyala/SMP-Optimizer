@@ -1,7 +1,6 @@
 ﻿open System
 open DMLib.String
 open DMLib.IO
-open DMLib.IO.Path
 
 [<EntryPoint>]
 let main (args) =
