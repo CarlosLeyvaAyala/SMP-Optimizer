@@ -34,7 +34,7 @@ let private read fn = fn |> Tuple.dupMapSnd File.ReadAllText
 
 let private write r (filename: string, contents: string) =
     try
-        //File.WriteAllText(fn, contents)
+        File.WriteAllText(filename, contents)
         filename |> r |> Ok
     with e ->
         Error e.Message
@@ -43,7 +43,7 @@ let singleFile filename =
     match filename |> read |> replace |> Option.map (write id) with
     | None -> printfn "No optimizations were needed"
     | Some(Ok _) -> printfn "Optimization was successful"
-    | Some(Error e) -> printfn "Could not optimize: %s" e
+    | Some(Error e) -> printfn "Could not be optimized: %s" e
 
 let directory basePath =
     let r (s: string) = s.Replace(basePath, "")
@@ -58,5 +58,5 @@ let directory basePath =
     match ok, errors with
     | [], [] -> printfn "No optimizations were needed"
     | _, _ ->
-        ok |> displayFileList "The following files were optimized successfully"
+        ok |> displayFileList "The following files were successfully optimized"
         errors |> displayFileList "Errors found while optimizing"
