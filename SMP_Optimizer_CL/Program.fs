@@ -4,7 +4,10 @@ open DMLib.IO
 [<Flags>]
 type CmdLineFlags =
     | Verbose = 1
-    | LogToFile = 0b10
+    | OverwriteFiles = 0b10
+    | OptimizeAggressive = 0b100
+    | OptimizeMedium = 0b1000
+    | OptimizeExpensive = 0b10000
 
 let banner = Display.procesedItemBanner
 
@@ -33,6 +36,6 @@ let main (args) =
                 errorMsg $":\n{e.Message}" input)
         |> ignore
 
-    printfn "\nPress any key to continue..."
-    Console.ReadKey() |> ignore
+        printfn "\nSMP optimization finished"
+
     0
