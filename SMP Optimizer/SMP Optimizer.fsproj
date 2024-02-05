@@ -10,10 +10,17 @@
     <Compile Include="Display.fs" />
     <Compile Include="Optimize.fs" />
     <Compile Include="Program.fs" />
+    <None Include="scratchpad.fsx" />
   </ItemGroup>
+
+  <ItemGroup />
 
   <ItemGroup>
     <ProjectReference Include="..\..\DMLib-FSharp\DMLib-FSharp.fsproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="8.0.101" />
   </ItemGroup>
 
 </Project>
