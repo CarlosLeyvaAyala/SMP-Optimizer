@@ -1,22 +1,28 @@
 ﻿open System
 open DMLib.IO
+open CmdLine
 
 let banner = Display.procesedItemBanner
 
 let errorMsg msg n =
     banner $"\"{n}\"\n\nCan not be processed because{msg}."
 
-let doProcess op n =
-    banner n
-    op n
-
 [<EntryPoint>]
 let main (args) =
     Console.Title <- "SMP Optimizer"
+    let i = CmdLine.Core.processArgs args
 
-    match args with
+    match i.input with
     | [||] -> Display.smartassBanner ()
     | a ->
+        let doProcess op n =
+            banner n
+            op i.testing.writingFunction n
+
+        match i.testing with
+        | Testing -> printfn "Running in testing mode.\nNo changes will be saved.\n"
+        | DoWrite -> ()
+
         a
         |> Array.iter (fun input ->
             try

@@ -5,6 +5,7 @@ open System.Collections.Generic
 open System.IO
 open DMLib
 open DMLib.String
+open CmdLine
 
 [<AutoOpen>]
 module private Helpers =
@@ -35,22 +36,15 @@ module private Core =
 
     let read fn = fn |> Tuple.dupMapSnd File.ReadAllText
 
-    let write r (filename: string, contents: string) =
-        try
-            File.WriteAllText(filename, contents)
-            filename |> r |> Ok
-        with e ->
-            Error e.Message
-
     /// Process a single file
-    let processFileWith op filename =
+    let processFileWith op (write: WritingFunction) filename =
         match filename |> read |> op |> Option.map (write id) with
         | None -> printfn "No optimizations were needed"
         | Some(Ok _) -> printfn "Optimization was successful"
         | Some(Error e) -> printfn "Could not be optimized:\n%s" e
 
     // Process all files inside a directory
-    let processDirWith op basePath =
+    let processDirWith op write basePath =
         let r (s: string) = s.Replace(basePath, "")
 
         let ok, errors =

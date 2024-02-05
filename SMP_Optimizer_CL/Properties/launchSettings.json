@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SMP_Optimizer_CL": {
+      "commandName": "Project",
+      "commandLineArgs": "\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\"\r\n-t\r\n-l0\r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Companion Moon\""
+    }
+  }
+}
