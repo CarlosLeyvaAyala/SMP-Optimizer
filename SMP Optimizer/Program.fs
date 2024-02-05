@@ -1,6 +1,11 @@
 ﻿open System
 open DMLib.IO
 
+[<Flags>]
+type CmdLineFlags =
+    | Verbose = 1
+    | LogToFile = 0b10
+
 let banner = Display.procesedItemBanner
 
 let errorMsg msg n =
