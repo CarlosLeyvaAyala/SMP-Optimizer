@@ -1,14 +1,6 @@
 ﻿open System
 open DMLib.IO
 
-[<Flags>]
-type CmdLineFlags =
-    | Verbose = 1
-    | OverwriteFiles = 0b10
-    | OptimizeAggressive = 0b100
-    | OptimizeMedium = 0b1000
-    | OptimizeExpensive = 0b10000
-
 let banner = Display.procesedItemBanner
 
 let errorMsg msg n =
