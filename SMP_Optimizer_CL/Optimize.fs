@@ -6,6 +6,7 @@ open System.IO
 open DMLib
 open DMLib.String
 open CmdLine
+open DMLib.Combinators
 
 [<AutoOpen>]
 module private Helpers =
@@ -25,22 +26,27 @@ module private Helpers =
 
 [<AutoOpen>]
 module private Core =
-    let private change from ``to`` (filename: string, contents) =
+    let private change log from ``to`` (filename: string, contents) =
         if contents |> contains from then
+            log <| sprintf "\"%s\" was found. Replacing it for \"%s\"" from ``to``
+
             Some <| (filename, contents |> replace from ``to``)
         else
+            log <| sprintf "\"%s\" was not found. Nothing to process." from
             None
 
-    let optimization = change "per-triangle-shape" "per-vertex-shape"
-    let revert = change "per-vertex-shape" "per-triangle-shape"
+    let optimization log =
+        change log "per-triangle-shape" "per-vertex-shape"
+
+    let revert log =
+        change log "per-vertex-shape" "per-triangle-shape"
 
     let read fn = fn |> Tuple.dupMapSnd File.ReadAllText
 
     /// Process a single file
     let processFileWith op (log: string -> unit) (write: WritingFunction) filename =
-        log "Processing file"
-
-        match filename |> read |> op |> Option.map (write id) with
+        // TODO: Integrate logging with the op function
+        match filename |> read |> (op log) |> Option.map (write id) with
         | None -> printfn "No optimizations were needed"
         | Some(Ok _) -> printfn "Optimization was successful"
         | Some(Error e) -> printfn "Could not be optimized:\n%s" e
@@ -51,9 +57,13 @@ module private Core =
 
         let ok, errors =
             Directory.GetFiles(basePath, "*.xml", SearchOption.AllDirectories) // Find files
+            |> tee (sprintf "*.xml files found:\n%A\n" >> log)
             |> Array.map read // Get file contents
-            |> Array.Parallel.choose op // Replacement step
+            // TODO: Integrate logging with the op function
+            |> Array.Parallel.choose (op log) // Replacement step
+            |> tap (log "")
             |> Array.map (write r) // Save updated files
+            |> tap (log "")
             |> splitByOkAndErrors
 
         match ok, errors with

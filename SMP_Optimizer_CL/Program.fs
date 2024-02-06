@@ -1,23 +1,29 @@
 ﻿open System
 open DMLib.IO
+open DMLib.String
 open CmdLine
 
 let banner = Display.procesedItemBanner
 
 let errorMsg msg n =
-    banner $"\"{n}\"\n\nCan not be processed because{msg}."
+    banner $"{n}\n\nCan not be processed because{msg}"
 
 [<EntryPoint>]
 let main (args) =
     Console.Title <- "SMP Optimizer"
     let i = CmdLine.Core.processArgs args
 
+    Display.logCmdLineArgs args i
+
     match i.input with
     | [||] -> Display.smartassBanner ()
     | a ->
         let doProcess op n =
+            let log = i.logging.loggingFunction
+            let write = i.testing.writingFunction log
             banner n
-            op i.logging.loggingFunction i.testing.writingFunction n
+            // TODO: Integrate logging with the op function
+            op log write n
 
         match i.testing with
         | Testing -> printfn "Running in testing mode.\nNo changes will be saved.\n"

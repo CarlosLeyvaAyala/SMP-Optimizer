@@ -2,7 +2,7 @@
   "profiles": {
     "SMP_Optimizer_CL": {
       "commandName": "Project",
-      "commandLineArgs": "\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\"\r\n-t\r\n-l0\r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Companion Moon\""
+      "commandLineArgs": "\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\"\r\n-t\r\n-l1  \r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Companion Moon\"\r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\\meshes\\SunJeongStuff\\Flirty Summer\\dress.xml\"\r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\\meshes\\SunJeongStuff\\Flirty Summer\\dress_1.nif\"\r\n-v"
     }
   }
 }

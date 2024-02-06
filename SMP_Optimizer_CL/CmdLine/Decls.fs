@@ -81,19 +81,26 @@ type WritingFunction = (string -> string) -> string * string -> Result<string, s
 
 type TestingMode with
 
-    member t.writingFunction: WritingFunction =
+    member t.writingFunction: (string -> unit) -> WritingFunction =
         match t with
         | Testing ->
-            fun _ (filename: string, _: string) ->
-                //printfn "\"%s\" not written (testing mode)" <| getFileName filename
+            fun log _ (filename: string, _: string) ->
+                filename
+                |> getFileName
+                |> sprintf "\"%s\" was not written (testing mode)"
+                |> log
 
                 Ok filename
         | DoWrite ->
-            fun r (filename: string, contents: string) ->
+            fun log r (filename: string, contents: string) ->
+                let fn = getFileName filename
+
                 try
                     File.WriteAllText(filename, contents)
+                    sprintf "\"%s\" succesfully written." fn |> log
                     filename |> r |> Ok
                 with e ->
+                    sprintf "\"%s\" could not be written because of an exception." fn |> log
                     Error e.Message
 
 type LogMode with

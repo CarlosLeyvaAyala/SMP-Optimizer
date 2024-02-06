@@ -35,3 +35,24 @@ let procesedItemBanner t =
     p $"Processing:\n{t}"
     p b
     p ""
+
+
+open CmdLine
+
+let logCmdLineArgs args (i: Parameters) =
+    let log = i.logging.loggingFunction
+
+    log "Starting parameters:"
+    args |> sprintf "%A" |> log
+
+    log ""
+
+    log "Processed parameters:"
+    i.optimization |> sprintf "%A" |> log
+    i.logging |> sprintf "%A" |> log
+    i.testing |> sprintf "%A" |> log
+    i.input |> sprintf "%A" |> log
+    i.output |> sprintf "%A" |> log
+
+    log ""
+    log ""
