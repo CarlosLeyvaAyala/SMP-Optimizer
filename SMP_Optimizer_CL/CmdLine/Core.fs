@@ -29,17 +29,16 @@ let processArgs args =
     let testingMode = translateFlag "-t" Testing DoWrite
 
     let optimization =
-        let defaultOptimization = Aggressive // TODO: Change to medium
         let aggresive = translateFlag "-l2" Aggressive Unknown
         let medium = translateFlag "-l1" Medium Unknown
         let expensive = translateFlag "-l0" Expensive Unknown
 
         match aggresive, medium, expensive with
-        | Unknown, Unknown, Unknown -> defaultOptimization
+        | Unknown, Unknown, Unknown -> OptimizationMode.Default
         | _, Medium, _ -> Medium
         | Aggressive, _, _ -> Aggressive
         | _, _, Expensive -> Expensive
-        | _ -> defaultOptimization
+        | _ -> OptimizationMode.Default
 
     let outputA = a |> Array.except allFlags
 

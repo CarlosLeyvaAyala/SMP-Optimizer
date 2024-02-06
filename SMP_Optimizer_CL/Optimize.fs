@@ -37,14 +37,16 @@ module private Core =
     let read fn = fn |> Tuple.dupMapSnd File.ReadAllText
 
     /// Process a single file
-    let processFileWith op (write: WritingFunction) filename =
+    let processFileWith op (log: string -> unit) (write: WritingFunction) filename =
+        log "Processing file"
+
         match filename |> read |> op |> Option.map (write id) with
         | None -> printfn "No optimizations were needed"
         | Some(Ok _) -> printfn "Optimization was successful"
         | Some(Error e) -> printfn "Could not be optimized:\n%s" e
 
     // Process all files inside a directory
-    let processDirWith op write basePath =
+    let processDirWith op (log: string -> unit) write basePath =
         let r (s: string) = s.Replace(basePath, "")
 
         let ok, errors =

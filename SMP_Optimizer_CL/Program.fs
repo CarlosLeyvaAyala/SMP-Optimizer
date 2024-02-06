@@ -17,7 +17,7 @@ let main (args) =
     | a ->
         let doProcess op n =
             banner n
-            op i.testing.writingFunction n
+            op i.logging.loggingFunction i.testing.writingFunction n
 
         match i.testing with
         | Testing -> printfn "Running in testing mode.\nNo changes will be saved.\n"

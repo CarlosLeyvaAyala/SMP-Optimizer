@@ -6,6 +6,7 @@ open System.Collections.Generic
 open System.IO
 open DMLib
 open DMLib.String
+open DMLib.IO.Path
 
 type ZipFileName = private ZipFileName of string
 type DirName = private DirName of string
@@ -84,7 +85,8 @@ type TestingMode with
         match t with
         | Testing ->
             fun _ (filename: string, _: string) ->
-                printfn "\"%s\"\nWas not be written because app is running in testing mode\n" filename
+                //printfn "\"%s\" not written (testing mode)" <| getFileName filename
+
                 Ok filename
         | DoWrite ->
             fun r (filename: string, contents: string) ->
@@ -93,3 +95,14 @@ type TestingMode with
                     filename |> r |> Ok
                 with e ->
                     Error e.Message
+
+type LogMode with
+
+    member t.loggingFunction =
+        match t with
+        | Verbose -> printfn "%s"
+        | Normal -> ignore
+
+type OptimizationMode with
+    // TODO: Change to medium
+    static member Default = Aggressive
