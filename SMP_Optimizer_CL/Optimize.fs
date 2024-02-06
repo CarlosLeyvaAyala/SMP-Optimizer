@@ -9,22 +9,6 @@ open CmdLine
 open DMLib.Combinators
 
 [<AutoOpen>]
-module private Helpers =
-    /// Splits the list of errors and successes into two different lists
-    let splitByOkAndErrors xs =
-        let oks = List<'T>()
-        let errors = List<'V>()
-
-        for x in xs do
-            match x with
-            | Ok v -> oks.Add v
-            | Error e -> errors.Add e
-
-        let l x = x |> seq |> List.ofSeq
-
-        (l oks, l errors)
-
-[<AutoOpen>]
 module private Core =
     let private change log from ``to`` (filename: string, contents) =
         if contents |> contains from then
@@ -64,7 +48,8 @@ module private Core =
             |> tap (log "")
             |> Array.map (write r) // Save updated files
             |> tap (log "")
-            |> splitByOkAndErrors
+            |> List.ofArray
+            |> List.partitionResult
 
         match ok, errors with
         | [], [] -> printfn "No optimizations were needed"
