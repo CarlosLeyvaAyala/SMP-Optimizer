@@ -7,16 +7,16 @@ open DMLib.IO
 let processArgs args =
     let a =
         args
-        |> Array.map (function
-            | StartsWith' "-" flag -> flag |> toLower
-            | a -> a) // Normalize flags
+        |> Array.choose (function
+            | StartsWith' Flags.startChar flag -> flag |> toLower |> Some // Normalize flags
+            | IsWhiteSpaceStr -> None // Remove empty arguments
+            | a -> Some a)
 
     let allFlags =
         a
-        |> Array.choose (fun s ->
-            match toLower s with
-            | "-o" -> None
-            | StartsWith' "-" f -> Some f
+        |> Array.choose (function
+            | Flags.output -> None
+            | StartsWith' Flags.startChar f -> Some f
             | _ -> None)
         |> Array.distinct
 
@@ -25,27 +25,16 @@ let processArgs args =
         | Some _ -> exists
         | None -> notExists
 
-    let log = translateFlag "-v" Verbose Normal
-    let testingMode = translateFlag "-t" Testing DoWrite
-
-    let optimization =
-        let aggresive = translateFlag "-l2" Aggressive Unknown
-        let medium = translateFlag "-l1" Medium Unknown
-        let expensive = translateFlag "-l0" Expensive Unknown
-
-        match aggresive, medium, expensive with
-        | Unknown, Unknown, Unknown -> OptimizationMode.Default
-        | _, Medium, _ -> Medium
-        | Aggressive, _, _ -> Aggressive
-        | _, _, Expensive -> Expensive
-        | _ -> OptimizationMode.Default
+    let log = LogMode.get translateFlag
+    let testingMode = TestingMode.get translateFlag
+    let optimization = OptimizationMode.get translateFlag
 
     let outputA = a |> Array.except allFlags
 
     let output =
         match
             outputA
-            |> Array.tryFindIndex (fun s -> s = "-o")
+            |> Array.tryFindIndex (fun s -> s = Flags.output)
             |> Option.map (fun i ->
                 let i' = i + 1
                 if i' > outputA.Length - 1 then None else Some outputA[i'])
@@ -54,7 +43,7 @@ let processArgs args =
         | Some x ->
             match x with
             | IsExtension ZipFileName.ext fn -> ToZip <| ZipFileName.ofStr fn
-            | HasExtension _ -> Invalid
+            | HasExtension _ -> failwith $"\"{x}\" is not a valid output folder/file."
             | IsEmptyStr -> Overwrite
             | dir -> ToDir <| DirName.ofStr dir
         | None -> Overwrite
@@ -62,12 +51,11 @@ let processArgs args =
     let input =
         outputA
         |> Array.except
-            [| "-o"
+            [| Flags.output
                match output with
-               | Overwrite
-               | Invalid -> ""
+               | Overwrite -> ""
                | ToDir d -> d.toStr
-               | ToZip z -> z.toStr |]
+               | ToZip z -> z.toStr |] // All remaining stuff, except the output
 
     { logging = log
       testing = testingMode

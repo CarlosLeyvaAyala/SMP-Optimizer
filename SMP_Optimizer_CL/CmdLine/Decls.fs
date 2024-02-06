@@ -25,12 +25,17 @@ type FileWritingMode =
     | Overwrite
     | ToDir of DirName
     | ToZip of ZipFileName
-    | Invalid
 
 type OptimizationMode =
+    /// Vertex on vertex collision.
     | Aggressive
-    | Medium
+    /// Triangle collision on body. Vertex on everything else.
+    | MediumTBody
+    /// Vertex collision on body. Triangle on everything else.
+    | MediumVBody
+    /// Triangle on triangle collision.
     | Expensive
+    /// Will be transformed to default optimization level.
     | Unknown
 
 type Parameters =
@@ -40,6 +45,18 @@ type Parameters =
       optimization: OptimizationMode
       input: string array }
 
+[<RequireQualifiedAccess>]
+module Flags =
+    let startChar = "-"
+    let testingMode = "-t"
+    let logVerbose = "-v"
+    let optAggresive = "-l2"
+    let optMediumT = "-l1a"
+    let optMediumV = "-l1b"
+    let optExpensive = "-l0"
+
+    [<Literal>]
+    let output = "-o"
 
 //████████╗██╗   ██╗██████╗ ███████╗
 //╚══██╔══╝╚██╗ ██╔╝██╔══██╗██╔════╝
@@ -63,7 +80,7 @@ type ZipFileName with
     static member ofStr =
         function
         | IsExtension ZipFileName.ext fn -> ZipFileName fn
-        | e -> failwith $"\"{e}\" has not a valid zip file extension    "
+        | e -> failwith $"\"{e}\" has not a valid zip file extension."
 
     member t.toStr = let (ZipFileName v) = t in v
 
@@ -80,6 +97,9 @@ type DirName with
 type WritingFunction = (string -> string) -> string * string -> Result<string, string>
 
 type TestingMode with
+
+    static member get translateFlag =
+        translateFlag Flags.testingMode Testing DoWrite
 
     member t.writingFunction: (string -> unit) -> WritingFunction =
         match t with
@@ -105,11 +125,29 @@ type TestingMode with
 
 type LogMode with
 
+    static member get translateFlag =
+        translateFlag Flags.logVerbose Verbose Normal
+
     member t.loggingFunction =
         match t with
         | Verbose -> printfn "%s"
         | Normal -> ignore
 
 type OptimizationMode with
-    // TODO: Change to medium
-    static member Default = Aggressive
+
+    static member get translateFlag =
+        // TODO: Change to medium
+        let Default = Aggressive
+
+        let aggresive = translateFlag Flags.optAggresive Aggressive Unknown
+        let mediumT = translateFlag Flags.optMediumT MediumTBody Unknown
+        let mediumV = translateFlag Flags.optMediumV MediumTBody Unknown
+        let expensive = translateFlag Flags.optExpensive Expensive Unknown
+
+        match aggresive, mediumT, mediumV, expensive with
+        | Unknown, Unknown, Unknown, Unknown -> Default
+        | _, MediumTBody, _, _ -> MediumTBody
+        | _, _, MediumVBody, _ -> MediumVBody
+        | Aggressive, _, _, _ -> Aggressive
+        | _, _, _, Expensive -> Expensive
+        | _ -> Default

@@ -10,36 +10,40 @@ let errorMsg msg n =
 
 [<EntryPoint>]
 let main (args) =
-    Console.Title <- "SMP Optimizer"
-    let i = CmdLine.Core.processArgs args
+    try
+        Console.Title <- "SMP Optimizer"
+        let i = CmdLine.Core.processArgs args
 
-    Display.logCmdLineArgs args i
+        Display.logCmdLineArgs args i
 
-    match i.input with
-    | [||] -> Display.smartassBanner ()
-    | a ->
-        let doProcess op n =
-            let log = i.logging.loggingFunction
-            let write = i.testing.writingFunction log
-            banner n
-            // TODO: Integrate logging with the op function
-            op log write n
+        match i.input with
+        | [||] -> Display.smartassBanner ()
+        | a ->
+            let doProcess op n =
+                let log = i.logging.loggingFunction
+                let write = i.testing.writingFunction log
+                banner n
+                // TODO: Integrate logging with the op function
+                op log write n
 
-        match i.testing with
-        | Testing -> printfn "Running in testing mode.\nNo changes will be saved.\n"
-        | DoWrite -> ()
+            match i.testing with
+            | Testing -> printfn "Running in testing mode.\nNo changes will be saved.\n"
+            | DoWrite -> ()
 
-        a
-        |> Array.iter (fun input ->
-            try
-                match input with
-                | IsDir d -> doProcess Optimize.directory d
-                | FileExists f & (IsExtension "xml" _) -> doProcess Optimize.singleFile f
-                | x -> errorMsg $" it is not an xml file or a folder." x
-            with e ->
-                errorMsg $":\n{e.Message}" input)
-        |> ignore
+            a
+            |> Array.iter (fun input ->
+                try
+                    match input with
+                    | IsDir d -> doProcess Optimize.directory d
+                    | FileExists f & (IsExtension "xml" _) -> doProcess Optimize.singleFile f
+                    | x -> errorMsg $" it is not an xml file or a folder." x
+                with e ->
+                    errorMsg $":\n{e.Message}" input)
+            |> ignore
 
-        printfn "\nSMP optimization finished"
+            printfn "\nSMP optimization finished"
 
-    0
+        0
+    with e ->
+        printfn "%s" e.Message
+        -1
