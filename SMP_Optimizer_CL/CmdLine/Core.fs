@@ -29,27 +29,11 @@ let processArgs args =
     let testingMode = TestingMode.get translateFlag
     let optimization = OptimizationMode.get translateFlag
 
-    let outputA = a |> Array.except allFlags
-
-    let output =
-        match
-            outputA
-            |> Array.tryFindIndex (fun s -> s = Flags.output)
-            |> Option.map (fun i ->
-                let i' = i + 1
-                if i' > outputA.Length - 1 then None else Some outputA[i'])
-            |> Option.flatten
-        with
-        | Some x ->
-            match x with
-            | IsExtension ZipFileName.ext fn -> ToZip <| ZipFileName.ofStr fn
-            | HasExtension _ -> failwith $"\"{x}\" is not a valid output folder/file."
-            | IsEmptyStr -> Overwrite
-            | dir -> ToDir <| DirName.ofStr dir
-        | None -> Overwrite
+    let notFlags = a |> Array.except allFlags
+    let output = FileWritingMode.get notFlags
 
     let input =
-        outputA
+        notFlags
         |> Array.except
             [| Flags.output
                match output with

@@ -151,3 +151,22 @@ type OptimizationMode with
         | Aggressive, _, _, _ -> Aggressive
         | _, _, _, Expensive -> Expensive
         | _ -> Default
+
+type FileWritingMode with
+
+    static member get outputA =
+        match
+            outputA
+            |> Array.tryFindIndex (fun s -> s = Flags.output)
+            |> Option.map (fun i ->
+                let i' = i + 1
+                if i' > outputA.Length - 1 then None else Some outputA[i']) // The first argument after "-o"
+            |> Option.flatten
+        with
+        | Some x ->
+            match x with
+            | IsExtension ZipFileName.ext fn -> ToZip <| ZipFileName.ofStr fn
+            | HasExtension _ -> failwith $"\"{x}\" is not a valid output folder/file."
+            | IsEmptyStr -> Overwrite
+            | dir -> ToDir <| DirName.ofStr dir
+        | None -> Overwrite
