@@ -105,10 +105,7 @@ type TestingMode with
         match t with
         | Testing ->
             fun log _ (filename: string, _: string) ->
-                filename
-                |> getFileName
-                |> sprintf "\"%s\" was not written (testing mode)"
-                |> log
+                filename |> sprintf "\"%s\"\nWas not written (testing mode)." |> log
 
                 Ok filename
         | DoWrite ->
@@ -117,10 +114,10 @@ type TestingMode with
 
                 try
                     File.WriteAllText(filename, contents)
-                    sprintf "\"%s\" succesfully written." fn |> log
+                    sprintf "\"%s\"\nSuccesfully written." fn |> log
                     filename |> r |> Ok
                 with e ->
-                    sprintf "\"%s\" could not be written because of an exception." fn |> log
+                    sprintf "\"%s\"\nCould not be written because of an exception." fn |> log
                     Error e.Message
 
 type LogMode with
