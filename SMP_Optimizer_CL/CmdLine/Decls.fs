@@ -110,14 +110,12 @@ type TestingMode with
                 Ok filename
         | DoWrite ->
             fun log r (filename: string, contents: string) ->
-                let fn = getFileName filename
-
                 try
                     File.WriteAllText(filename, contents)
-                    sprintf "\"%s\"\nSuccesfully written." fn |> log
+                    sprintf "\"%s\"\nSuccesfully written." filename |> log
                     filename |> r |> Ok
                 with e ->
-                    sprintf "\"%s\"\nCould not be written because of an exception." fn |> log
+                    sprintf "\"%s\"\nCould not be written because of an exception." filename |> log
                     Error e.Message
 
 type LogMode with
