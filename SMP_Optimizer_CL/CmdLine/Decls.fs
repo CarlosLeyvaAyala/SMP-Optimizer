@@ -148,12 +148,17 @@ type OptimizationMode with
         | _ -> Default
 
     static member private replaceAll from ``to`` log (filename: string, contents) =
+        let didOptimize = sprintf "Optimization: \"%s\" was found. Replacing it for \"%s\""
+
+        let didntOptimize =
+            sprintf "Optimization: \"%s\" was not found. Nothing to process."
+
         match contents with
         | Contains from ->
-            log <| sprintf "\"%s\" was found. Replacing it for \"%s\"" from ``to``
-            Some <| (filename, contents |> replace from ``to``)
+            log <| didOptimize from ``to``
+            Some(filename, contents |> replace from ``to``)
         | _ ->
-            log <| sprintf "\"%s\" was not found. Nothing to process." from
+            log <| didntOptimize from
             None
 
     /// Returns a function that accepts a logging function, a (filename, contents) and
