@@ -109,11 +109,11 @@ type TestingMode with
 
                 Ok filename
         | DoWrite ->
-            fun log r (filename: string, contents: string) ->
+            fun log setDisplayName (filename: string, contents: string) ->
                 try
                     File.WriteAllText(filename, contents)
                     sprintf "\"%s\"\nSuccesfully written." filename |> log
-                    filename |> r |> Ok
+                    filename |> setDisplayName |> Ok
                 with e ->
                     sprintf "\"%s\"\nCould not be written because of an exception." filename |> log
                     Error e.Message
@@ -146,6 +146,25 @@ type OptimizationMode with
         | Aggressive, _, _, _ -> Aggressive
         | _, _, _, Expensive -> Expensive
         | _ -> Default
+
+    static member private replaceAll from ``to`` log (filename: string, contents) =
+        match contents with
+        | Contains from ->
+            log <| sprintf "\"%s\" was found. Replacing it for \"%s\"" from ``to``
+            Some <| (filename, contents |> replace from ``to``)
+        | _ ->
+            log <| sprintf "\"%s\" was not found. Nothing to process." from
+            None
+
+    /// Returns a function that accepts a logging function, a (filename, contents) and
+    /// returns an (filename, modifiedContents) option. <c>Ok</c> means the optimization was necessary.
+    member t.optimizationFunction =
+        match t with
+        | MediumTBody -> failwith "Medium optimization not yet implemented."
+        | Aggressive -> OptimizationMode.replaceAll "per-triangle-shape" "per-vertex-shape"
+        | Expensive -> OptimizationMode.replaceAll "per-vertex-shape" "per-triangle-shape"
+        | MediumVBody -> failwith "Medium optimization not yet implemented."
+        | Unknown -> failwith "Optimization function can not be unknown at this point."
 
 type FileWritingMode with
 

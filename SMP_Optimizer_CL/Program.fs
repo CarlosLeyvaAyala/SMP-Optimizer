@@ -19,12 +19,13 @@ let main (args) =
         match i.input with
         | [||] -> Display.smartassBanner ()
         | a ->
-            let doProcess op n =
+            let doProcess operation n =
                 let log = i.logging.loggingFunction
                 let write = i.testing.writingFunction log
+                let optimize = i.optimization.optimizationFunction log
                 banner n
                 // TODO: Integrate logging with the op function
-                op log write n
+                operation log optimize write n
 
             match i.testing with
             | Testing -> printfn "Running in testing mode.\nNo changes will be saved.\n"
