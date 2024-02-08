@@ -70,7 +70,7 @@ module Flags =
 //███████╗██╔╝ ██╗   ██║   ███████╗██║ ╚████║███████║██║╚██████╔╝██║ ╚████║███████║
 //╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
-open CmdLine.Implmentations
+open CmdLine.Implementations
 
 type ZipFileName with
 
@@ -102,20 +102,8 @@ type TestingMode with
 
     member t.writingFunction: (string -> unit) -> WritingFunction =
         match t with
-        | Testing ->
-            fun log _ (filename: string, _: string) ->
-                filename |> sprintf "\"%s\"\nWas not written (testing mode)." |> log
-
-                Ok filename
-        | DoWrite ->
-            fun log setDisplayName (filename: string, contents: string) ->
-                try
-                    File.WriteAllText(filename, contents)
-                    sprintf "\"%s\"\nSuccesfully written." filename |> log
-                    filename |> setDisplayName |> Ok
-                with e ->
-                    sprintf "\"%s\"\nCould not be written because of an exception." filename |> log
-                    Error e.Message
+        | Testing -> TestingMode.dontWrite
+        | DoWrite -> TestingMode.doWrite
 
 type LogMode with
 

@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="CmdLine\Algorithms\TestingMode.fs" />
     <Compile Include="CmdLine\Algorithms\OptimizatonMode.fs" />
     <Compile Include="CmdLine\Decls.fs" />
     <Compile Include="CmdLine\Core.fs" />
