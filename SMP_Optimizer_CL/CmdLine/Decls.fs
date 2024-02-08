@@ -70,6 +70,7 @@ module Flags =
 //███████╗██╔╝ ██╗   ██║   ███████╗██║ ╚████║███████║██║╚██████╔╝██║ ╚████║███████║
 //╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
+open CmdLine.Implmentations
 
 type ZipFileName with
 
@@ -128,12 +129,8 @@ type LogMode with
 
 type OptimizationMode with
 
-    static member Triangle = "per-triangle-shape"
-    static member Vertex = "per-vertex-shape"
-
     static member get translateFlag =
-        // TODO: Change to medium
-        let Default = Aggressive
+        let Default = MediumTBody
 
         let aggresive = translateFlag Flags.optAggresive Aggressive Unknown
         let mediumT = translateFlag Flags.optMediumT MediumTBody Unknown
@@ -148,78 +145,16 @@ type OptimizationMode with
         | _, _, _, Expensive -> Expensive
         | _ -> Default
 
-    static member private replaceAll from ``to`` log (filename: string, contents) =
-        let didOptimize = sprintf "Optimization: \"%s\" was found. Replacing it for \"%s\""
-
-        let didntOptimize =
-            sprintf "Optimization: \"%s\" was not found. Nothing to process."
-
-        match contents with
-        | Contains from ->
-            log <| didOptimize from ``to``
-            Some(filename, contents |> replace from ``to``)
-        | _ ->
-            log <| didntOptimize from
-            None
-
-    static member private setMediumQuality hiQualityBody log (filename: string, contents) =
-        log "Changing to medium quality"
-        let rx = Regex("(?s)<per-vertex-shape name=\"(.*?)\">.*?<\/per-vertex-shape>")
-
-        // Sets some collision body to high quality
-        let setAsTri collisionBody contents =
-            let newQuality =
-                collisionBody |> replace OptimizationMode.Vertex OptimizationMode.Triangle
-
-            contents |> replace collisionBody newQuality
-
-        let logUnchanged = sprintf "Is %s. Leave as vertex collision."
-        let logChanged = sprintf "Is %s. Change collision to triangle."
-        let id' _ = id
-
-        let logBody, changeBody, logArmor, changeArmor =
-            if hiQualityBody then
-                logChanged, setAsTri, logUnchanged, id'
-            else
-                logUnchanged, id', logChanged, setAsTri
-
-        let lowQualityContents =
-            contents |> replace OptimizationMode.Triangle OptimizationMode.Vertex
-
-        let optimized =
-            rx.Matches(lowQualityContents)
-            |> Seq.map (fun m ->
-                match m.Groups[1].Value with
-                // Ground is always left as vertex
-                | StartsWithIC' "VirtualGround" g ->
-                    g |> logUnchanged |> log
-                    id
-                // Physics bodies
-                | StartsWithIC' "Virtual" body ->
-                    body |> logBody |> log
-                    changeBody m.Value
-                // Armor pieces
-                | unknown ->
-                    unknown |> logArmor |> log
-                    changeArmor unknown)
-            |> Seq.fold (fun acc f -> f acc) lowQualityContents
-
-        if optimized = contents then
-            log <| sprintf "\"%s\"\nWas already optimized." filename
-            None
-        else
-            Some(filename, optimized)
-
 
     /// Returns a function that accepts a logging function, a (filename, contents) and
     /// returns an (filename, modifiedContents) option. <c>Ok</c> means the optimization was necessary.
     member t.optimizationFunction =
         match t with
         | Unknown
-        | MediumTBody -> OptimizationMode.setMediumQuality true
+        | MediumTBody -> OptimizationMode.setMediumQuality OptimizationMode.TriangleBody
         | Aggressive -> OptimizationMode.replaceAll OptimizationMode.Triangle OptimizationMode.Vertex
         | Expensive -> OptimizationMode.replaceAll OptimizationMode.Vertex OptimizationMode.Triangle
-        | MediumVBody -> OptimizationMode.setMediumQuality false
+        | MediumVBody -> OptimizationMode.setMediumQuality OptimizationMode.VertexBody
 
 type FileWritingMode with
 

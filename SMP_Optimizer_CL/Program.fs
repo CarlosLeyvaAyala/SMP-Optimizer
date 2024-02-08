@@ -3,6 +3,7 @@ open DMLib.IO
 open DMLib.String
 open CmdLine
 
+// TODO: Ignore files from \SKSE\Plugins\
 let banner = Display.procesedItemBanner
 
 let errorMsg msg n =
@@ -24,7 +25,7 @@ let main (args) =
                 let write = i.testing.writingFunction log
                 let optimize = i.optimization.optimizationFunction log
                 banner n
-                // TODO: Integrate logging with the op function
+
                 operation log optimize write n
 
             match i.testing with
