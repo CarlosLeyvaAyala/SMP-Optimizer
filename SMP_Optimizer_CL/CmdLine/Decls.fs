@@ -2,11 +2,9 @@
 
 open DMLib.String
 open DMLib.IO
-open System.Collections.Generic
+open System.Text.RegularExpressions
 open System.IO
 open DMLib
-open DMLib.String
-open DMLib.IO.Path
 
 type ZipFileName = private ZipFileName of string
 type DirName = private DirName of string
@@ -130,6 +128,9 @@ type LogMode with
 
 type OptimizationMode with
 
+    static member Triangle = "per-triangle-shape"
+    static member Vertex = "per-vertex-shape"
+
     static member get translateFlag =
         // TODO: Change to medium
         let Default = Aggressive
@@ -161,15 +162,64 @@ type OptimizationMode with
             log <| didntOptimize from
             None
 
+    static member private setMediumQuality hiQualityBody log (filename: string, contents) =
+        log "Changing to medium quality"
+        let rx = Regex("(?s)<per-vertex-shape name=\"(.*?)\">.*?<\/per-vertex-shape>")
+
+        // Sets some collision body to high quality
+        let setAsTri collisionBody contents =
+            let newQuality =
+                collisionBody |> replace OptimizationMode.Vertex OptimizationMode.Triangle
+
+            contents |> replace collisionBody newQuality
+
+        let logUnchanged = sprintf "Is %s. Leave as vertex collision."
+        let logChanged = sprintf "Is %s. Change collision to triangle."
+        let id' _ = id
+
+        let logBody, changeBody, logArmor, changeArmor =
+            if hiQualityBody then
+                logChanged, setAsTri, logUnchanged, id'
+            else
+                logUnchanged, id', logChanged, setAsTri
+
+        let lowQualityContents =
+            contents |> replace OptimizationMode.Triangle OptimizationMode.Vertex
+
+        let optimized =
+            rx.Matches(lowQualityContents)
+            |> Seq.map (fun m ->
+                match m.Groups[1].Value with
+                // Ground is always left as vertex
+                | StartsWithIC' "VirtualGround" g ->
+                    g |> logUnchanged |> log
+                    id
+                // Physics bodies
+                | StartsWithIC' "Virtual" body ->
+                    body |> logBody |> log
+                    changeBody m.Value
+                // Armor pieces
+                | unknown ->
+                    unknown |> logArmor |> log
+                    changeArmor unknown)
+            |> Seq.fold (fun acc f -> f acc) lowQualityContents
+
+        if optimized = contents then
+            log <| sprintf "\"%s\"\nWas already optimized." filename
+            None
+        else
+            Some(filename, optimized)
+
+
     /// Returns a function that accepts a logging function, a (filename, contents) and
     /// returns an (filename, modifiedContents) option. <c>Ok</c> means the optimization was necessary.
     member t.optimizationFunction =
         match t with
-        | MediumTBody -> failwith "Medium optimization not yet implemented."
-        | Aggressive -> OptimizationMode.replaceAll "per-triangle-shape" "per-vertex-shape"
-        | Expensive -> OptimizationMode.replaceAll "per-vertex-shape" "per-triangle-shape"
-        | MediumVBody -> failwith "Medium optimization not yet implemented."
-        | Unknown -> failwith "Optimization function can not be unknown at this point."
+        | Unknown
+        | MediumTBody -> OptimizationMode.setMediumQuality true
+        | Aggressive -> OptimizationMode.replaceAll OptimizationMode.Triangle OptimizationMode.Vertex
+        | Expensive -> OptimizationMode.replaceAll OptimizationMode.Vertex OptimizationMode.Triangle
+        | MediumVBody -> OptimizationMode.setMediumQuality false
 
 type FileWritingMode with
 
