@@ -2,17 +2,21 @@
 
 open DMLib.IO
 open System.IO
+open DMLib.IO.Path
 
-let dontWrite log _ (filename: string, _: string) =
-    filename |> sprintf "\"%s\"\nWas not written (testing mode)." |> log
+/// Simulate writing.
+let dontWrite log _ _ (filename: string, _: string) =
+    filename
+    |> getFileName
+    |> sprintf "\"%s\" was not written (testing mode)."
+    |> log
 
     Ok filename
 
-
-let doWrite log setDisplayName (filename: string, contents: string) =
+/// Do the actual writing.
+let doWrite log write setDisplayName (filename: string, contents: string) =
     try
-        File.WriteAllText(filename, contents)
-        sprintf "\"%s\"\nSuccesfully written." filename |> log
+        filename |> write contents |> sprintf "\"%s\"\nSuccesfully written." |> log
         filename |> setDisplayName |> Ok
     with e ->
         sprintf "\"%s\"\nCould not be written because of an exception." filename |> log

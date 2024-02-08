@@ -39,7 +39,7 @@ let processArgs args =
                match output with
                | Overwrite -> ""
                | ToDir d -> d.toStr
-               | ToZip z -> z.toStr |] // All remaining stuff, except the output
+               | ToZip(_, z) -> z.toStr |] // All remaining stuff, except the output
 
     { logging = log
       testing = testingMode

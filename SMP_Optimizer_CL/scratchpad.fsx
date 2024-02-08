@@ -30,30 +30,32 @@
 #load "..\..\DMLib-FSharp\Types\Skyrim\UniqueId.fs"
 
 // App
-#load "./CmdLine/Decls.fs"
-#load "./CmdLine/Core.fs"
+#load "CmdLine\Algorithms\TestingMode.fs"
+#load "CmdLine\Algorithms\OptimizatonMode.fs"
+#load "CmdLine\Decls.fs"
+#load "CmdLine\Core.fs"
+#load "Display.fs"
+#load "Optimize.fs"
+
 //
 #time "on"
 
 open System.IO
+open System.Text.RegularExpressions
 open DMLib
 open DMLib.String
 open DMLib.IO
+open DMLib.IO.Path
 open CmdLine
 open CmdLine.Core
-open System.Text.RegularExpressions
 
-// Get output file name
-Directory.GetFiles(@"F:\Skyrim SE\MO2\mods\[Christine] Flirty Summer", "*.xml", SearchOption.AllDirectories)
-|> Array.choose (fun xxx ->
-    match xxx with
-    | Regex @".*\\(meshes\\.*)" l -> Some l[0]
-    | _ -> None)
+let loadDecls =
+    getScriptLoadDeclarations
+        @"C:\Users\Osrail\Documents\GitHub\SMP Optimizer\SMP_Optimizer_CL\scratchpad.fsx"
+        @"C:\Users\Osrail\Documents\GitHub\SMP Optimizer\SMP_Optimizer_CL\SMP_Optimizer_CL.fsproj"
 
-
-
-
-let f = OptimizationMode.Aggressive.optimizationFunction ignore
+loadDecls @"C:\Users\Osrail\Documents\GitHub\SMP Optimizer\SMP_Optimizer_CL\"
+|> TextCopy.ClipboardService.SetText
 
 //let ff =
 //    Directory.GetFiles(@"F:\Skyrim SE\MO2\mods", "*.xml", SearchOption.AllDirectories)

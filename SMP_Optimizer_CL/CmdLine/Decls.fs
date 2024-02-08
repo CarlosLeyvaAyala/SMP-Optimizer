@@ -2,12 +2,13 @@
 
 open DMLib.String
 open DMLib.IO
-open System.Text.RegularExpressions
+open DMLib.IO.Path
 open System.IO
 open DMLib
 
 type ZipFileName = private ZipFileName of string
 type DirName = private DirName of string
+type TempDirName = DirName
 
 type LogMode =
     | Normal
@@ -22,7 +23,7 @@ type TestingMode =
 type FileWritingMode =
     | Overwrite
     | ToDir of DirName
-    | ToZip of ZipFileName
+    | ToZip of TempDirName * ZipFileName
 
 type OptimizationMode =
     /// Vertex on vertex collision.
@@ -92,15 +93,21 @@ type DirName with
 
     member t.toStr = let (DirName v) = t in v
 
-
-type WritingFunction = (string -> string) -> string * string -> Result<string, string>
+/// Converts a file name to a displayable version.
+type FileNameDisplayFunction = string -> string
+/// Writes an optimized file. Tells if optimization was needed.
+type WritingFunction = FileNameDisplayFunction -> string * string -> Result<string, string>
+/// Accepts a string and logs it.
+type LoggingFunction = string -> unit
+/// Transforms a file name, writes the file and returns the new file name. signature: contents -> filename -> createdFileName
+type OutputWritingFunction = string -> string -> string
 
 type TestingMode with
 
     static member get translateFlag =
         translateFlag Flags.testingMode Testing DoWrite
 
-    member t.writingFunction: (string -> unit) -> WritingFunction =
+    member t.writingFunction: LoggingFunction -> OutputWritingFunction -> WritingFunction =
         match t with
         | Testing -> TestingMode.dontWrite
         | DoWrite -> TestingMode.doWrite
@@ -157,8 +164,26 @@ type FileWritingMode with
         with
         | Some x ->
             match x with
-            | IsExtension ZipFileName.ext fn -> ToZip <| ZipFileName.ofStr fn
+            | IsExtension ZipFileName.ext fn ->
+                let zip = ZipFileName.ofStr fn
+
+                let tmp =
+                    Path.GetTempPath()
+                    |> combine2' ("SMP Optimizer - " + System.Guid.NewGuid().ToString())
+                    |> TempDirName.ofStr
+
+                ToZip(tmp, zip)
             | HasExtension _ -> failwith $"\"{x}\" is not a valid output folder/file."
             | IsEmptyStr -> Overwrite
             | dir -> ToDir <| DirName.ofStr dir
         | None -> Overwrite
+
+    /// Returns a function with signature: contents -> filename -> createdFileName
+    member t.writingFunction: OutputWritingFunction =
+        match t with
+        | ToDir d -> FileWritingMode.writeForModManager d.toStr
+        | ToZip(d, _) -> FileWritingMode.writeForModManager d.toStr
+        | Overwrite ->
+            fun c fn ->
+                File.WriteAllText(fn, c)
+                fn
