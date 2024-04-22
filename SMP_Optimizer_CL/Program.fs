@@ -40,11 +40,12 @@ let main (args) =
                 try
                     match input with
                     | IsDir d -> doProcess Optimize.directory d
+                    // TODO: filter not in Meshes
+                    | FileExists f & (IsExtension "xml" _) -> doProcess Optimize.singleFile f
                     | NotContainsIC' @"\meshes\" fn ->
                         errorMsg
                             ":\nThis program will only process armor files; needs to be inside a \"\\Meshes\\\" folder."
                             fn
-                    | FileExists f & (IsExtension "xml" _) -> doProcess Optimize.singleFile f
                     | x -> errorMsg $" it is not an xml file or a folder." x
                 with e ->
                     errorMsg $":\n{e.Message}" input)

@@ -23,6 +23,7 @@ module private Core =
     let processDirWith (log: string -> unit) optimize write basePath =
         let r (s: string) = s.Replace(basePath, "")
 
+        // TODO: filter not in Meshes
         let ok, errors =
             Directory.GetFiles(basePath, "*.xml", SearchOption.AllDirectories) // Find files
             |> tee (sprintf "*.xml files found:\n%A\n" >> log)
