@@ -57,6 +57,15 @@ module Flags =
     [<Literal>]
     let output = "-o"
 
+[<AutoOpen>]
+module Globals =
+    let x = ""
+
+    let (|IsSmpConfigFile|_|) =
+        function
+        | FileExists f & (IsExtension "xml" _) & ContainsIC @"\meshes\" -> Some f
+        | _ -> None
+
 //████████╗██╗   ██╗██████╗ ███████╗
 //╚══██╔══╝╚██╗ ██╔╝██╔══██╗██╔════╝
 //   ██║    ╚████╔╝ ██████╔╝█████╗

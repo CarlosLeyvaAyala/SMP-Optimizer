@@ -1,0 +1,52 @@
+<UserControl
+    x:Class="GUI.Views.MainView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:GUI.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="400"
+    x:DataType="vm:MainViewModel"
+    mc:Ignorable="d">
+    <Design.DataContext>
+        <!--
+            This only sets the DataContext for the previewer in an IDE,
+            to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.fs)
+        -->
+        <vm:MainViewModel />
+    </Design.DataContext>
+    <StackPanel>
+        <Border
+            Margin="5"
+            Background="LightBlue"
+            CornerRadius="10">
+            <TextBlock
+                Margin="5"
+                HorizontalAlignment="Center"
+                FontSize="24"
+                Text="Conde Papas" /> 
+        </Border>
+        <Grid
+            Margin="5"
+            ColumnDefinitions="120, *"
+            RowDefinitions="auto, auto, auto"
+            ShowGridLines="True">
+            <Label>Celcius</Label>
+            <TextBox Name="celcius" Grid.Column="1" />
+            <Label Grid.Row="1">Fahrenheit</Label>
+            <TextBox
+                Name="fahrenheit"
+                Grid.Row="1"
+                Grid.Column="1" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,5"
+                HorizontalAlignment="Center"
+                Click="DoRunClicked"
+                Content="Calculate" />
+        </Grid>
+    </StackPanel>
+</UserControl>

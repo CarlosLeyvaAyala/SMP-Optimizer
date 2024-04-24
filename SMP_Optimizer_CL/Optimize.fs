@@ -4,7 +4,6 @@ module Ops
 open System.Collections.Generic
 open System.IO
 open DMLib
-open DMLib.String
 open CmdLine
 open DMLib.Combinators
 
@@ -23,9 +22,9 @@ module private Core =
     let processDirWith (log: string -> unit) optimize write basePath =
         let r (s: string) = s.Replace(basePath, "")
 
-        // TODO: filter not in Meshes
         let ok, errors =
             Directory.GetFiles(basePath, "*.xml", SearchOption.AllDirectories) // Find files
+            |> Array.choose (|IsSmpConfigFile|_|)
             |> tee (sprintf "*.xml files found:\n%A\n" >> log)
             |> Array.map read // Get file contents
             |> Array.Parallel.choose optimize // Replacement step

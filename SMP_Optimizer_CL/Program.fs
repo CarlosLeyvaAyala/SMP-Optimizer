@@ -40,8 +40,7 @@ let main (args) =
                 try
                     match input with
                     | IsDir d -> doProcess Optimize.directory d
-                    // TODO: filter not in Meshes
-                    | FileExists f & (IsExtension "xml" _) -> doProcess Optimize.singleFile f
+                    | IsSmpConfigFile f -> doProcess Optimize.singleFile f
                     | NotContainsIC' @"\meshes\" fn ->
                         errorMsg
                             ":\nThis program will only process armor files; needs to be inside a \"\\Meshes\\\" folder."
@@ -72,7 +71,9 @@ let main (args) =
 
             printfn "\nSMP optimization finished"
 
+        //Console.ReadLine() |> ignore
         0
     with e ->
         printfn "%s" e.Message
+        //Console.ReadLine() |> ignore
         -1
