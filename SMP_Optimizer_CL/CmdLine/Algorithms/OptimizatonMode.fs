@@ -1,7 +1,10 @@
 ﻿module CmdLine.Implementations.OptimizationMode
 
+open DMLib
 open DMLib.String
 open System.Text.RegularExpressions
+open DMLib.IO
+open System.IO
 
 type MediumBodyQuality =
     | TriangleBody
@@ -12,6 +15,20 @@ let Triangle = "per-triangle-shape"
 
 [<Literal>]
 let Vertex = "per-vertex-shape"
+
+/// List of known physics bodies that don't follow the Virtual<n> convention.
+let private knownBodies =
+    System.Reflection.Assembly.GetExecutingAssembly().Location
+    |> System.IO.Path.GetDirectoryName
+    |> Path.combine2' "Physics_Bodies.txt"
+    |> File.ReadAllLines
+    |> Array.map dupFst
+    |> Map.ofArray
+
+let private (|IsPhysicsBody|_|) =
+    function
+    | StartsWithIC' "Virtual" body -> Some body
+    | u -> knownBodies |> Map.tryFind u
 
 let replaceAll from ``to`` log (filename: string, contents) =
     let didOptimize = sprintf "Optimization: \"%s\" was found. Replacing it for \"%s\""
@@ -37,14 +54,16 @@ let setMediumQuality bodyQuality log (filename: string, contents) =
 
         contents |> replace collisionBody newQuality
 
-    let logUnchanged = sprintf "Is %s. Leave as vertex collision."
-    let logChanged = sprintf "Is %s. Change collision to triangle."
+    let displayArmor = sprintf "armor (%s)"
+    let displayBody = sprintf "physics body (%s)"
+    let logUnchanged = sprintf "Found %s. Leave as vertex collision."
+    let logChanged = sprintf "Found %s. Change collision to triangle."
     let id' _ = id
 
     let logBody, changeBody, logArmor, changeArmor =
         match bodyQuality with
-        | TriangleBody -> logChanged, setAsTri, logUnchanged, id'
-        | VertexBody -> logUnchanged, id', logChanged, setAsTri
+        | TriangleBody -> displayBody >> logChanged, setAsTri, displayArmor >> logUnchanged, id'
+        | VertexBody -> displayBody >> logUnchanged, id', displayArmor >> logChanged, setAsTri
 
     let lowQualityContents = contents |> replace Triangle Vertex
 
@@ -57,7 +76,7 @@ let setMediumQuality bodyQuality log (filename: string, contents) =
                 g |> logUnchanged |> log
                 id
             // Physics bodies
-            | StartsWithIC' "Virtual" body ->
+            | IsPhysicsBody body ->
                 body |> logBody |> log
                 changeBody m.Value
             // Armor pieces

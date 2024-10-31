@@ -32,6 +32,7 @@
 // App
 #load "CmdLine\Algorithms\TestingMode.fs"
 #load "CmdLine\Algorithms\OptimizatonMode.fs"
+#load "CmdLine\Algorithms\FileWritingMode.fs"
 #load "CmdLine\Decls.fs"
 #load "CmdLine\Core.fs"
 #load "Display.fs"
