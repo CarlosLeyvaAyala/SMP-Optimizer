@@ -63,14 +63,14 @@ This is an example of how that could be done for MO2:
 
 #### Step 2
 
-Drag your folder(s)/file(s) over any of the included *.bat files.
+Drag your folder(s)/file(s) over any of the included `*.bat` files.
 
 ![Drag and drop on bat](help_files/bat%20drop.png)
 
 Read more about optimization levels [here](#optimization-levels).
 
 !!!warning 
-    If you skipped step 1, the program will complain to you about not having a path to write its output and will automatically open `output_dir.txt` so you add the output folder/zip in there.
+    If you skipped step 1, the program will complain to you about not having a path to write its output and will automatically open a newly created `output_dir.txt` for your convenience.
 
     ![output_dir.txt example](help_files/asking%20for%20bat%20output.png)
 
