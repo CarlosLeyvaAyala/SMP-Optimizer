@@ -28,6 +28,8 @@ let processArgs args =
     let log = LogMode.get translateFlag
     let testingMode = TestingMode.get translateFlag
     let optimization = OptimizationMode.get translateFlag
+    let caller = CalledFrom.get translateFlag
+    let help = ShowHelp.get translateFlag
 
     let notFlags = a |> Array.except allFlags
     let output = FileWritingMode.get notFlags
@@ -45,4 +47,6 @@ let processArgs args =
       testing = testingMode
       optimization = optimization
       output = output
+      calledFrom = caller
+      showHelp = help
       input = input }

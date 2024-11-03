@@ -5,6 +5,7 @@ open DMLib.String
 open System.Text.RegularExpressions
 open DMLib.IO
 open System.IO
+open CmdLine
 
 type MediumBodyQuality =
     | TriangleBody
@@ -18,12 +19,7 @@ let Vertex = "per-vertex-shape"
 
 /// List of known physics bodies that don't follow the Virtual<n> convention.
 let private knownBodies =
-    System.Reflection.Assembly.GetExecutingAssembly().Location
-    |> System.IO.Path.GetDirectoryName
-    |> Path.combine2' "Physics_Bodies.txt"
-    |> File.ReadAllLines
-    |> Array.map dupFst
-    |> Map.ofArray
+    Paths.physicsBodiesFile |> File.ReadAllLines |> Array.map dupFst |> Map.ofArray
 
 let private (|IsPhysicsBody|_|) =
     function

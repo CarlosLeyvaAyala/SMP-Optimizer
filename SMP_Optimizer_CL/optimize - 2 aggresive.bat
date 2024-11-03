@@ -1,4 +1,9 @@
-@REM @echo off
-set /p out=<output_dir.txt
-"%~dp0SMP_Optimizer_CL.exe" %1 -l2 -o %out% -v
+@echo off
+
+:: Read output file/folder from "output_dir.txt"
+set /p out=<output_dir.txt 
+
+:: Run program
+"%~dp0SMP_Optimizer_CL.exe" %1 -l2 -o %out% -bat
+
 pause

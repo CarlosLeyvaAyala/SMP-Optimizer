@@ -2,7 +2,7 @@
   "profiles": {
     "SMP_Optimizer_CL": {
       "commandName": "Project",
-      "commandLineArgs": "\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\"\r\n-l1a  a \r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] DeNile\"\r\n\"F:\\Skyrim SE\\MO2\\mods\\[COCO] Chun Li Qipao - CBBE 3BA\"\r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\\meshes\\SunJeongStuff\\Flirty Summer\\dress.xml\"\r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\\meshes\\SunJeongStuff\\Flirty Summer\\dress_1.nif\"\r\n\"F:\\Skyrim SE\\MO2\\mods\\[Caenarvon] Pharaoh Slave\"\r\n-v\r\n-o\r\n\"F:\\Skyrim SE\\MO2\\mods\\DM-Dynamic-Armors\""
+      "commandLineArgs": "\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\"\r\n-l1a  a \r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] DeNile\"\r\n\"F:\\Skyrim SE\\MO2\\mods\\[COCO] Chun Li Qipao - CBBE 3BA\"\r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\\meshes\\SunJeongStuff\\Flirty Summer\\dress.xml\"\r\n\"F:\\Skyrim SE\\MO2\\mods\\[Christine] Flirty Summer\\meshes\\SunJeongStuff\\Flirty Summer\\dress_1.nif\"\r\n\"F:\\Skyrim SE\\MO2\\mods\\[Caenarvon] Pharaoh Slave\"\r\n-o\r\n-t\r\n-bat"
     }
   }
 }

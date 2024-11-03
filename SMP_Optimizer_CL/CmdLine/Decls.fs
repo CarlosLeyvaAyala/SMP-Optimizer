@@ -37,22 +37,46 @@ type OptimizationMode =
     /// Will be transformed to default optimization level.
     | Unknown
 
+/// Where was the program called from
+type CalledFrom =
+    | BatFile
+    | GUIClient
+    | CommandLine
+
+type ShowHelp =
+    | HTML
+    | NoHelp
+
 type Parameters =
     { logging: LogMode
       testing: TestingMode
       output: FileWritingMode
       optimization: OptimizationMode
+      calledFrom: CalledFrom
+      showHelp: ShowHelp
       input: string array }
 
 [<RequireQualifiedAccess>]
 module Flags =
     let startChar = "-"
+    /// Open help file
+    let help = "-h"
+    /// Run program, but don't write output
     let testingMode = "-t"
+    /// Write detailed info
     let logVerbose = "-v"
+    /// Vertex on vertex
     let optAggresive = "-l2"
+    /// Vertex on triangle
     let optMediumT = "-l1a"
+    /// Triangle on vertex
     let optMediumV = "-l1b"
+    /// Triangle on triangle
     let optExpensive = "-l0"
+    /// Program was called from a batch file
+    let callFromBat = "-bat"
+    /// Program was called from thee C# app
+    let callFromGui = "-gui"
 
     [<Literal>]
     let output = "-o"
@@ -81,6 +105,12 @@ module Globals =
 //╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 open CmdLine.Implementations
+
+[<AutoOpen>]
+module private Helpers =
+    /// Converts a translateFlag function so it can be curryied more easily
+    let translateFlag' (f: string -> 'a -> 'a -> 'a) o2 (flag: string) o1 = f flag o1 o2
+
 
 type ZipFileName with
 
@@ -121,6 +151,10 @@ type TestingMode with
         | Testing -> TestingMode.dontWrite
         | DoWrite -> TestingMode.doWrite
 
+type ShowHelp with
+
+    static member get translateFlag = translateFlag Flags.help HTML NoHelp
+
 type LogMode with
 
     static member get translateFlag =
@@ -130,6 +164,17 @@ type LogMode with
         match t with
         | Verbose -> printfn "%s"
         | Normal -> ignore
+
+type CalledFrom with
+
+    static member get translateFlag =
+        let Default = CommandLine
+        let t = translateFlag' translateFlag Default
+
+        match t Flags.callFromBat BatFile, t Flags.callFromGui GUIClient with
+        | BatFile, _ -> BatFile
+        | _, GUIClient -> GUIClient
+        | _ -> CommandLine
 
 type OptimizationMode with
 
