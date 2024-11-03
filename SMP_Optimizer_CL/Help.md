@@ -40,10 +40,17 @@ export_on_save:
 This is the suggested way to use this program, since it will create new configuration files for your armors so the originals remain untouched.
 If you use any kind of mod manager (and you should), you may prefer to use this method.
 
+Only 2 steps are needed.
+
 #### Step 1
 Create a new file named `output_dir.txt` inside the folder where `SMP_Optimizer_CL.exe` is and **on the first line** of it write the folder name where you want your optimized files to be written to.
 
 Save that file.
+
+!!!
+    This step is needed only the first time you run the program.
+
+    Once `output_dir.txt` is properly configured, you can go directly to step 2 all subsequent times.
 
 This is an example of how that could be done for MO2:
 
@@ -112,7 +119,6 @@ Calculations are high quality but expensive, which means clothes will clip as yo
 Virtual bodies and cloths will use triangles (which are computationally expensive) for collision detection.
 
 **You can still expect this level to make some gains**, since it changes virtual floor calculations from triangle (expensive) to vertex (cheap).
-
 All armors I've seen use triangle collisions for the floor, by the way.
 
 ### Medium quality levels (1a & 1b)
