@@ -7,26 +7,40 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "DMLib-FSharp", "..\DMLib-FS
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "SMP_Optimizer_CL", "SMP_Optimizer_CL\SMP_Optimizer_CL.fsproj", "{C41A91AD-9CCE-4F02-8C1A-903F3082AA31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMP_Optimizer", "SMP_Optimizer\SMP_Optimizer.csproj", "{BAA1C199-AC3B-4B27-AF51-2BC267213EC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SMP_Optimizer", "SMP_Optimizer\SMP_Optimizer.csproj", "{BAA1C199-AC3B-4B27-AF51-2BC267213EC7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{B6E5680E-EA2D-4A88-A034-E3D92A6C94E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B6E5680E-EA2D-4A88-A034-E3D92A6C94E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6E5680E-EA2D-4A88-A034-E3D92A6C94E1}.Debug|x64.ActiveCfg = Debug|x64
+		{B6E5680E-EA2D-4A88-A034-E3D92A6C94E1}.Debug|x64.Build.0 = Debug|x64
 		{B6E5680E-EA2D-4A88-A034-E3D92A6C94E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6E5680E-EA2D-4A88-A034-E3D92A6C94E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6E5680E-EA2D-4A88-A034-E3D92A6C94E1}.Release|x64.ActiveCfg = Release|x64
+		{B6E5680E-EA2D-4A88-A034-E3D92A6C94E1}.Release|x64.Build.0 = Release|x64
 		{C41A91AD-9CCE-4F02-8C1A-903F3082AA31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C41A91AD-9CCE-4F02-8C1A-903F3082AA31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41A91AD-9CCE-4F02-8C1A-903F3082AA31}.Debug|x64.ActiveCfg = Debug|x64
+		{C41A91AD-9CCE-4F02-8C1A-903F3082AA31}.Debug|x64.Build.0 = Debug|x64
 		{C41A91AD-9CCE-4F02-8C1A-903F3082AA31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C41A91AD-9CCE-4F02-8C1A-903F3082AA31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C41A91AD-9CCE-4F02-8C1A-903F3082AA31}.Release|x64.ActiveCfg = Release|x64
+		{C41A91AD-9CCE-4F02-8C1A-903F3082AA31}.Release|x64.Build.0 = Release|x64
 		{BAA1C199-AC3B-4B27-AF51-2BC267213EC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BAA1C199-AC3B-4B27-AF51-2BC267213EC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAA1C199-AC3B-4B27-AF51-2BC267213EC7}.Debug|x64.ActiveCfg = Debug|x64
+		{BAA1C199-AC3B-4B27-AF51-2BC267213EC7}.Debug|x64.Build.0 = Debug|x64
 		{BAA1C199-AC3B-4B27-AF51-2BC267213EC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAA1C199-AC3B-4B27-AF51-2BC267213EC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAA1C199-AC3B-4B27-AF51-2BC267213EC7}.Release|x64.ActiveCfg = Release|x64
+		{BAA1C199-AC3B-4B27-AF51-2BC267213EC7}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

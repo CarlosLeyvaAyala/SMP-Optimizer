@@ -6,6 +6,7 @@ open System.IO.Compression
 open System.IO
 open DMLib.Combinators
 open System.Diagnostics
+open System.Threading
 
 // TODO: Ignore files from \SKSE\Plugins\
 let banner = Display.procesedItemBanner
@@ -63,7 +64,7 @@ let optimizeInputs log i a =
 let checkOutdirFile (i: Parameters) =
     match i.calledFrom, i.output with
     | BatFile, Overwrite ->
-        let fn = Paths.batOutDirFile
+        let fn = Paths.batOutDirFile ()
 
         if (dont File.Exists fn) then
             File.Create fn |> ignore
@@ -97,10 +98,11 @@ let processData i =
 let main (args) =
     try
         Console.Title <- "SMP Optimizer"
+
         let i = CmdLine.Core.processArgs args
 
         match i.showHelp with
-        | HTML -> File.execute Paths.helpFile
+        | HTML -> File.execute <| Paths.helpFile ()
         | NoHelp -> ()
 
         Display.logCmdLineArgs args i

@@ -19,7 +19,10 @@ let Vertex = "per-vertex-shape"
 
 /// List of known physics bodies that don't follow the Virtual<n> convention.
 let private knownBodies =
-    Paths.physicsBodiesFile |> File.ReadAllLines |> Array.map dupFst |> Map.ofArray
+    Paths.physicsBodiesFile ()
+    |> File.ReadAllLines
+    |> Array.map dupFst
+    |> Map.ofArray
 
 let private (|IsPhysicsBody|_|) =
     function
