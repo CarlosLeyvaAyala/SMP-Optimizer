@@ -28,6 +28,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Compile Include="CmdLine\Paths.fs" />
+    <Compile Include="CmdLine\Globals.fs" />
     <Compile Include="CmdLine\Algorithms\TestingMode.fs" />
     <Compile Include="CmdLine\Algorithms\OptimizatonMode.fs" />
     <Compile Include="CmdLine\Algorithms\FileWritingMode.fs" />

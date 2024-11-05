@@ -81,14 +81,6 @@ module Flags =
     [<Literal>]
     let output = "-o"
 
-[<AutoOpen>]
-module Globals =
-    let x = ""
-
-    let (|IsSmpConfigFile|_|) =
-        function
-        | FileExists f & (IsExtension "xml" _) & ContainsIC @"\meshes\" -> Some f
-        | _ -> None
 
 //████████╗██╗   ██╗██████╗ ███████╗
 //╚══██╔══╝╚██╗ ██╔╝██╔══██╗██╔════╝
@@ -105,6 +97,7 @@ module Globals =
 //╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝
 
 open CmdLine.Implementations
+open System
 
 [<AutoOpen>]
 module private Helpers =
@@ -140,6 +133,9 @@ type WritingFunction = FileNameDisplayFunction -> string * string -> Result<stri
 type LoggingFunction = string -> unit
 /// Transforms a file name, writes the file and returns the new file name. signature: contents -> filename -> createdFileName
 type OutputWritingFunction = string -> string -> string
+type ProcessingPath = string
+type OptimizationFunction = string * string -> (string * string) option
+type ProcessingFunction = LoggingFunction -> OptimizationFunction -> WritingFunction -> ProcessingPath -> unit
 
 type TestingMode with
 
@@ -201,8 +197,8 @@ type OptimizationMode with
         match t with
         | Unknown
         | MediumTBody -> OptimizationMode.setMediumQuality OptimizationMode.TriangleBody
-        | Aggressive -> OptimizationMode.replaceAll OptimizationMode.Triangle OptimizationMode.Vertex
-        | Expensive -> OptimizationMode.replaceAll OptimizationMode.Vertex OptimizationMode.Triangle
+        | Aggressive -> OptimizationMode.replaceAll Triangle Vertex
+        | Expensive -> OptimizationMode.replaceAll Vertex Triangle
         | MediumVBody -> OptimizationMode.setMediumQuality OptimizationMode.VertexBody
 
 type FileWritingMode with

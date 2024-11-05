@@ -11,24 +11,6 @@ type MediumBodyQuality =
     | TriangleBody
     | VertexBody
 
-[<Literal>]
-let Triangle = "per-triangle-shape"
-
-[<Literal>]
-let Vertex = "per-vertex-shape"
-
-/// List of known physics bodies that don't follow the Virtual<n> convention.
-let private knownBodies =
-    Paths.physicsBodiesFile ()
-    |> File.ReadAllLines
-    |> Array.map dupFst
-    |> Map.ofArray
-
-let private (|IsPhysicsBody|_|) =
-    function
-    | StartsWithIC' "Virtual" body -> Some body
-    | u -> knownBodies |> Map.tryFind u
-
 let replaceAll from ``to`` log (filename: string, contents) =
     let didOptimize = sprintf "Optimization: \"%s\" was found. Replacing it for \"%s\""
 
@@ -71,17 +53,15 @@ let setMediumQuality bodyQuality log (filename: string, contents) =
         |> Seq.map (fun m ->
             match m.Groups[1].Value with
             // Ground is always left as vertex
-            | StartsWithIC' "VirtualGround" g ->
+            | IsVirtualGround g ->
                 g |> logUnchanged |> log
                 id
-            // Physics bodies
             | IsPhysicsBody body ->
                 body |> logBody |> log
                 changeBody m.Value
-            // Armor pieces
-            | unknown ->
-                unknown |> logArmor |> log
-                changeArmor unknown)
+            | armor ->
+                armor |> logArmor |> log
+                changeArmor armor)
         |> Seq.fold (fun acc f -> f acc) lowQualityContents
 
     if optimized = contents then

@@ -1,40 +1,45 @@
 #r "nuget: TextCopy"
 
 // DMLib includes must be deleted once nuget works again
-#load "..\..\DMLib-FSharp\Combinators.fs"
-#load "..\..\DMLib-FSharp\MathL.fs"
-#load "..\..\DMLib-FSharp\Result.fs"
-#load "..\..\DMLib-FSharp\Option.fs"
-#load "..\..\DMLib-FSharp\Tuples.fs"
-#load "..\..\DMLib-FSharp\Array.fs"
-#load "..\..\DMLib-FSharp\String.fs"
-#load "..\..\DMLib-FSharp\List.fs"
-#load "..\..\DMLib-FSharp\Map.fs"
-#load "..\..\DMLib-FSharp\Dictionary.fs"
-#load "..\..\DMLib-FSharp\Objects.fs"
-#load "..\..\DMLib-FSharp\Collections.fs"
-#load "..\..\DMLib-FSharp\Files.fs"
-#load "..\..\DMLib-FSharp\IO\IO.Path.fs"
-#load "..\..\DMLib-FSharp\IO\File.fs"
-#load "..\..\DMLib-FSharp\IO\Directory.fs"
-#load "..\..\DMLib-FSharp\Json.fs"
-#load "..\..\DMLib-FSharp\Misc.fs"
-#load "..\..\DMLib-FSharp\Types\NonEmptyString.fs"
-#load "..\..\DMLib-FSharp\Types\RecordId.fs"
-#load "..\..\DMLib-FSharp\Types\MemoryAddress.fs"
-#load "..\..\DMLib-FSharp\Types\CanvasPoint.fs"
-#load "..\..\DMLib-FSharp\Types\Chance.fs"
-#load "..\..\DMLib-FSharp\Types\Skyrim\EDID.fs"
-#load "..\..\DMLib-FSharp\Types\Skyrim\Weight.fs"
-#load "..\..\DMLib-FSharp\Types\Skyrim\EspFileName.fs"
-#load "..\..\DMLib-FSharp\Types\Skyrim\UniqueId.fs"
+#I "..\..\DMLib-FSharp"
+#load "Combinators.fs"
+#load "MathL.fs"
+#load "Result.fs"
+#load "Option.fs"
+#load "Tuples.fs"
+#load "Array.fs"
+#load "String.fs"
+#load "List.fs"
+#load "Map.fs"
+#load "Dictionary.fs"
+#load "Objects.fs"
+#load "Collections.fs"
+#load "Files.fs"
+#load "IO\IO.Path.fs"
+#load "IO\File.fs"
+#load "IO\Directory.fs"
+#load "Json.fs"
+#load "Misc.fs"
+#load "Types\NonEmptyString.fs"
+#load "Types\RecordId.fs"
+#load "Types\MemoryAddress.fs"
+#load "Types\CanvasPoint.fs"
+#load "Types\Chance.fs"
+#load "Types\Skyrim\EDID.fs"
+#load "Types\Skyrim\Weight.fs"
+#load "Types\Skyrim\EspFileName.fs"
+#load "Types\Skyrim\UniqueId.fs"
 
 // App
-#load "CmdLine\Algorithms\TestingMode.fs"
-#load "CmdLine\Algorithms\OptimizatonMode.fs"
-#load "CmdLine\Algorithms\FileWritingMode.fs"
-#load "CmdLine\Decls.fs"
-#load "CmdLine\Core.fs"
+#I "CmdLine"
+#I "CmdLine\Algorithms"
+#load "Paths.fs"
+#load "Globals.fs"
+#load "TestingMode.fs"
+#load "OptimizatonMode.fs"
+#load "FileWritingMode.fs"
+#load "Decls.fs"
+#load "Core.fs"
 #load "Display.fs"
 #load "Optimize.fs"
 
@@ -58,44 +63,70 @@ let loadDecls =
 loadDecls @"C:\Users\Osrail\Documents\GitHub\SMP Optimizer\SMP_Optimizer_CL\"
 |> TextCopy.ClipboardService.SetText
 
-//let ff =
-//    Directory.GetFiles(@"F:\Skyrim SE\MO2\mods", "*.xml", SearchOption.AllDirectories)
+open System.Text.RegularExpressions
 
-//let fff = ff |> Array.Parallel.map (Tuple.dupMapSnd File.ReadAllText)
 
-//let rx = Regex("<per-\\w+-shape name=\"(.*?)\">")
+let fn =
+    [ @"F:\Skyrim SE\MO2\mods\[Christine] Queen Barbarian\meshes\SunJeongStuff\Queen Barbarian\upper.xml"
+      @"F:\Skyrim SE\MO2\mods\[COCO] Chun Li Qipao - CBBE 3BA\meshes\Coco_Cloths\CHUNLI_v1\coco_chunli.xml" ]
 
-//// Get most used tags
-//let x =
-//    fff
-//    |> Array.Parallel.choose (fun (fn, c) ->
-//        let m = rx.Matches(c)
+let rx = """<(per-triangle-shape|per-vertex-shape).*name="(?<n>.*)">""" |> Regex
 
-//        if m.Count > 0 then
-//            (seq { fn }, m |> Seq.map _.Groups[1].Value)
-//            ||> Seq.allPairs
-//            |> Seq.toArray
-//            |> Some
-//        else
-//            None)
-//    |> Array.collect id
+let analyze fn =
+    let allNames =
+        File.ReadAllText fn
+        |> rx.Matches
+        |> Seq.choose (fun m ->
+            match m.Groups["n"].Value with
+            | IsVirtualGround _ -> None
+            | s -> Some s)
+        |> Seq.toList
 
-//x
-//|> Array.groupBy snd
-//|> Array.map (Tuple.mapSnd (Array.distinct >> Array.map fst))
-//|> Array.filter (snd >> (fun a -> a.Length > 1))
-//|> Array.sortByDescending (snd >> _.Length)
-//|> Tuple.dupMapFst (fun a -> a |> Array.map fst |> Array.fold smartNl "")
-//|> fun (tagList, a) ->
-//    let fullList =
-//        a
-//        |> Array.map (fun (tag, files) ->
-//            tag
-//            + "\n"
-//            + (files |> Array.map (enclose "\t\t" "") |> Array.fold smartNl "")
-//            + "\n\n")
-//        |> Array.fold smartNl ""
+    match allNames |> List.choose (|IsPhysicsBody|_|) |> List.length with
+    | 0 -> Error(fn :: allNames)
+    | _ -> Ok fn
 
-//    tagList + "\n\n" + fullList
-//|> setFst @"F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\known smp tags.txt"
-//|> File.WriteAllText
+fn |> List.map analyze
+
+let allXML = @"F:\Skyrim SE\MO2\mods\" |> getFolderFiles
+
+let ok, errors =
+    allXML
+    |> (if allXML.Length > 300 then
+            Array.Parallel.map
+        else
+            Array.map)
+        analyze
+    |> List.ofArray
+    |> List.partitionResult
+
+let trueErrors, special =
+    errors
+    |> List.map (function
+        | filename :: [] -> Error filename
+        | filename :: errors ->
+            let e = errors |> List.fold smartNl ""
+
+            Ok $"{filename}\n{e}\n"
+        | [] -> Error "")
+    |> List.partitionResult
+
+
+
+let writeToOutput writeFn title outList =
+    let outFn = @"C:\Users\Osrail\Documents\GitHub\SMP Optimizer\errors.txt"
+
+    let banner =
+        let s = '*'
+        let t = $"{s} {title} {s}"
+        let sep = "".PadRight(t.Length, s)
+        [ sep; t |> toUpper; sep; "" ]
+
+    outList |> List.append banner |> List.toArray |> setFst outFn |> writeFn
+
+let rewriteFile = writeToOutput File.WriteAllLines
+let appendFile = writeToOutput File.AppendAllLines
+
+rewriteFile "files with no known bodies" trueErrors
+appendFile "special(?) files" (special @ [ "" ])
+appendFile "files with no problems" ok
