@@ -70,9 +70,10 @@ let fn =
     [ @"F:\Skyrim SE\MO2\mods\[Christine] Queen Barbarian\meshes\SunJeongStuff\Queen Barbarian\upper.xml"
       @"F:\Skyrim SE\MO2\mods\[COCO] Chun Li Qipao - CBBE 3BA\meshes\Coco_Cloths\CHUNLI_v1\coco_chunli.xml" ]
 
-let rx = """<(per-triangle-shape|per-vertex-shape).*name="(?<n>.*)">""" |> Regex
 
-let analyze fn =
+let analyzeBodies fn =
+    let rx = $"""<({Triangle}|{Vertex}).*name="(?<n>.*)">""" |> Regex
+
     let allNames =
         File.ReadAllText fn
         |> rx.Matches
@@ -86,7 +87,7 @@ let analyze fn =
     | 0 -> Error(fn :: allNames)
     | _ -> Ok fn
 
-fn |> List.map analyze
+fn |> List.map analyzeBodies
 
 let allXML = @"F:\Skyrim SE\MO2\mods\" |> getFolderFiles
 
@@ -96,7 +97,7 @@ let ok, errors =
             Array.Parallel.map
         else
             Array.map)
-        analyze
+        analyzeBodies
     |> List.ofArray
     |> List.partitionResult
 

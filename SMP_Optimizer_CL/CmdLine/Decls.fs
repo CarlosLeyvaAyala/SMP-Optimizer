@@ -14,6 +14,10 @@ type LogMode =
     | Normal
     | Verbose
 
+type OperationMode =
+    | Optimize
+    | Analyze
+
 /// Run mockup operations?
 type TestingMode =
     | DoWrite
@@ -54,6 +58,7 @@ type Parameters =
       optimization: OptimizationMode
       calledFrom: CalledFrom
       showHelp: ShowHelp
+      operationMode: OperationMode
       input: string array }
 
 [<RequireQualifiedAccess>]
@@ -65,6 +70,8 @@ module Flags =
     let testingMode = "-t"
     /// Write detailed info
     let logVerbose = "-v"
+    /// Analyze files
+    let opAnalyze = "-a"
     /// Vertex on vertex
     let optAggresive = "-l2"
     /// Vertex on triangle
@@ -150,6 +157,11 @@ type TestingMode with
 type ShowHelp with
 
     static member get translateFlag = translateFlag Flags.help HTML NoHelp
+
+type OperationMode with
+
+    static member get translateFlag =
+        translateFlag Flags.opAnalyze Analyze Optimize
 
 type LogMode with
 

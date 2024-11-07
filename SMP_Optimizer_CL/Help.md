@@ -17,7 +17,7 @@ export_on_save:
 ## Table of Contents {ignore=true}
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=2 depthTo=3 orderedList=false} -->
-
+  
 <!-- code_chunk_output -->
 
 - [How to use](#how-to-use)
@@ -27,6 +27,9 @@ export_on_save:
   - [Level 0 - Expensive](#level-0---expensive)
   - [Medium quality levels (1a & 1b)](#medium-quality-levels-1a--1b)
   - [Level 2 - Aggresive](#level-2---aggresive)
+- [Analyze](#analyze)
+  - [How to report results](#how-to-report-results)
+  - [Analyzing and you](#analyzing-and-you)
 - [Command line arguments](#command-line-arguments)
 
 <!-- /code_chunk_output -->
@@ -150,21 +153,56 @@ Still, it has its uses.
 
 You can use this mode for most hairdos and small accesories like earrings and such, or even some short pieces of cloth.
 
+<!-- ============================================== -->
+@import "help_files/analyze.md"
+
+<!-- ============================================== -->
 ## Command line arguments
 
 This reference will be helpful if you want to modify the included `*.bat` files to suit your preferences or if you are one of those weirdos who like to run programs from the command line :stuck_out_tongue:.
 
-| Argument    | Effect                                                                                                                                                               |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `-h`        | Opens this file[^HelpLol].                                                                                                                                           |
-| `-t`        | Runs in *testing mode*. <br>Everything will be optimized as expected, but no files will be created/overwritten.                                                      |
-| `-v`        | Verbose mode. <br>Writes a lot of detailed info, so you know exactly what the program is doing. <br>Useful for bug reporting.                                        |
-| `-bat`      | Makes some extra validations when the program was run from a `*.bat` file. <br>**Don't delete this from any of the included `*.bat` files**.                         |
-| `-l0`       | [Expensive optimization](#level-0---expensive) level.                                                                                                                |
-| `-l1a`      | [Medium optimization](#medium-quality-levels-1a--1b) level. Vertex on triangle collisions. <br>**Used by default** if no optimization level is provided.             |
-| `-l1b`      | [Medium optimization](#medium-quality-levels-1a--1b) level. Triangle on vertex collisions.                                                                           |
-| `-l2`       | [Aggresive optimization](#level-2---aggresive) level.                                                                                                                |
-| `-o "path"` | Output to some folder or `*.zip` file. **Path must always follow `-o`**. <br>If this argument is not provided, **optimized files will overwrite the original ones**. |
+### Inputh paths {ignore=true}
+This program accepts both `*.xml` files and directory paths in any combination and number. 
+
+Examples:
+
+```
+SMP_Optimizer_CL.exe "armor1.xml"
+SMP_Optimizer_CL.exe "armor1.xml" "armor2.xml"
+SMP_Optimizer_CL.exe "dir1" "dir2"
+SMP_Optimizer_CL.exe "armor1.xml" "armor2.xml" "dir1" "armor3.xml"
+```
+
+Directories and subdirectories are always processed in a recursive manner, so you only need to input the root path if you want to process all the files and directories inside the root.
+
+### Flags {ignore=true}
+
+| Flag            | Effect                                                                                                                                                                       |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-h`            | Opens this file[^HelpLol].                                                                                                                                                   |
+| `-t`            | Runs in *testing mode*. <br>Everything will be optimized as expected, but no files will be created/overwritten.                                                              |
+| `-v`            | Verbose mode. <br>Writes a lot of detailed info, so you know exactly what the program is doing. <br>Useful for bug reporting.                                                |
+| `-bat`          | Makes some extra validations when the program was run from a `*.bat` file (not meant to be used by users). <br>**Don't delete this from any of the included `*.bat` files**. |
+| `-l0`           | [Expensive optimization](#level-0---expensive) level.                                                                                                                        |
+| `-l1a`          | [Medium optimization](#medium-quality-levels-1a--1b) level. Vertex on triangle collisions. <br>**Used by default** if no optimization level is provided.                     |
+| `-l1b`          | [Medium optimization](#medium-quality-levels-1a--1b) level. Triangle on vertex collisions.                                                                                   |
+| `-l2`           | [Aggresive optimization](#level-2---aggresive) level.                                                                                                                        |
+| `-o "dirOrZip"` | Output to some directory or `*.zip` file. **Path must always follow `-o`**. <br>If this argument is not provided, **optimized files will overwrite the original ones**.      |
+
+All flags and inputs can be used in any order; the only limitation being `-o`, which should be always followed by  `"dirOrZip"`.
+If you add `-o` with no output path, SMP Optimizer will overwrite processed files:
+
+```
+SMP_Optimizer_CL.exe -l2 "input1" "input2" -o
+```
+Here are some examples of normal usage:
+
+```
+SMP_Optimizer_CL.exe -l1a "input1" "input2" -t
+SMP_Optimizer_CL.exe "input1" "input2" -l0 -v
+SMP_Optimizer_CL.exe -o "output.zip" "input1" "input2" -l1b
+SMP_Optimizer_CL.exe "input1" -o "output dir" "input2" -l1b
+```
 
 [^HelpLol]: Did you really expect to see this table inside the console app? Lol. It's 2024, dude :stuck_out_tongue:.
 

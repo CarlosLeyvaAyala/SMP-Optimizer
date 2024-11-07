@@ -30,6 +30,7 @@ let processArgs args =
     let optimization = OptimizationMode.get translateFlag
     let caller = CalledFrom.get translateFlag
     let help = ShowHelp.get translateFlag
+    let opM = OperationMode.get translateFlag
 
     let notFlags = a |> Array.except allFlags
     let output = FileWritingMode.get notFlags
@@ -48,5 +49,6 @@ let processArgs args =
       optimization = optimization
       output = output
       calledFrom = caller
+      operationMode = opM
       showHelp = help
       input = input }
