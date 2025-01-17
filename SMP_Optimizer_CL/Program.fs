@@ -1,6 +1,7 @@
 ﻿open System
 open DMLib.IO
 open CmdLine
+open Ops
 
 [<EntryPoint>]
 let main (args) =

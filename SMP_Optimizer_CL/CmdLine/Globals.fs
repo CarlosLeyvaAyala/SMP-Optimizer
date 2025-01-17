@@ -22,6 +22,8 @@ let private knownBodies =
 let (|IsPhysicsBody|_|) =
     function
     | StartsWithIC' "Virtual" body -> Some body
+    | StartsWithIC' "Box" body -> Some body
+    | ContainsIC' "Collision" body -> Some body
     | u -> knownBodies |> Map.tryFind u
 
 let (|IsVirtualGround|_|) =

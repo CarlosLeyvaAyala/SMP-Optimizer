@@ -1,0 +1,600 @@
+******************************
+* FILES WITH NO KNOWN BODIES *
+******************************
+
+F:\Skyrim SE\MO2\mods\Toys and Love\meshes\Toys\ToysAnalChain.xml
+PearAnal
+Chain
+
+F:\Skyrim SE\MO2\mods\Toys and Love\meshes\Toys\ToysTailSE.xml
+AnalPlug006_Material
+Bow_Materialpony
+
+F:\Skyrim SE\MO2\mods\Alliance Long Tabard\meshes\Alliance Box\Long Tabard\DP.xml
+CBBE
+BDO_Ran_2_cuirass_1
+BDO_Ran_2_cuirass_2
+BDO_Ran_2_cuirassMet
+
+F:\Skyrim SE\MO2\mods\Blade and Soul Yukata\meshes\bns\Yukata\cuirass.xml
+CBBE
+verhSunJeongHiPoly
+yukataSunJeongHiPoly
+
+F:\Skyrim SE\MO2\mods\Blade and Soul Yukata cbbe\meshes\bns\Yukata\cuirass.xml
+CBBE
+verhSunJeongHiPoly
+yukataSunJeongHiPoly
+
+F:\Skyrim SE\MO2\mods\Daughters of Dimitrescu Outfit - CBBE 3BA - TBD - BHUNP\meshes\Odd\Dimitrescu\odd.xml
+unbp
+feet
+Skirt
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Alliance Box\Long Tabard\DP.xml
+CBBE
+BDO_Ran_2_cuirass_1
+BDO_Ran_2_cuirass_2
+BDO_Ran_2_cuirassMet
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\bns\Yukata\cuirass.xml
+CBBE
+verhSunJeongHiPoly
+yukataSunJeongHiPoly
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\clothes\StoneheartStudio\StoneheartStudio3BBBSMP (was for SMP strings that are now removed).xml
+CBBE
+upper
+Strings
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\clothes\StoneheartStudio\StoneheartStudioSMP (was for SMP strings that are now removed).xml
+CBBE
+upper
+Strings
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Coco_Cloths\BattleAngels\Rektascloak.xml
+bodycol
+kneecol
+kneecol2
+feet
+cloak
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\hmmWorks\Marika_the_Eternal\Belt.xml
+coll_body_accurate
+QueenMarika_Belt_Chains
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\hmmWorks\Marika_the_Eternal\Dress.xml
+coll_body_accurate
+coll_skirt
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\hmmWorks\Marika_the_Eternal\Hair.xml
+coll_body
+coll_head
+coll_hair
+coll_braid
+QueenMarika_Hair_Front_Single
+QueenMarika_Hair_Side_Single
+QueenMarika_Hair_Top_Single
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Melodic\Bikini Armor\body.xml
+CBBEB
+0_Body
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Melodic\Bikini Armor\helm.xml
+0_Helm
+CBBE
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Melodic\Gypsy Love\skirt.xml
+CBBE
+skirt
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Melodic\Private Melody\skirt.xml
+CBBE
+skirt
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Melodic\Raven\cape.xml
+CBBE
+0_Cape:1
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\ninistuff\Ananta\hm.xml
+unbp
+head
+hand
+groupname
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\ninistuff\Damaged Feather\featherupper.xml
+CBBE
+upper
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\ninistuff\DragonRises\armor.xml
+CBBE
+armor1
+armor2
+armor3
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\ninistuff\Summer Casual\summer.xml
+CBBE
+lower1
+lower2
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Odd\BunnyAkali\BunnyChoker.xml
+unpb
+BunnyAkali_Choker
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Odd\BunnyAkali\BunnyCrown.xml
+BunnyAkali_RuinedEmblem_Mesh.025
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Odd\BunnyAkali\BunnyEars.xml
+head
+BunnyAkali_Headwear_BunnyEars
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Odd\BunnyAkali\BunnyHair.xml
+unpb
+head
+BunnyAkali_HairPonyTail
+BunnyAkali_Hair
+BunnyAkali_HairTie
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Odd\BunnyAkali\BunnyVeil.xml
+head
+BunnyAkali_Headwear_Veil
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Odd\DarkElfBlader\BladerHair.xml
+head
+unpb
+Hair PonyTail
+Hair Ribbon
+Hair_1
+Hair_2
+Hair_3
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Odd\DarkElfBlader\LowerSkirt.xml
+unpb
+11
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Odd\Dimitrescu\odd.xml
+unbp
+feet
+Skirt
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Odd\Sakura\SakuraHair.xml
+head
+unpb
+hand
+a
+b
+c
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Odd\Sakura\TopDress.xml
+unpb
+11
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Takuya\wulehuoni\vail.xml
+UUNPVagina
+feet001
+vail
+X1
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Takuya\wulehuoni\wh.xml
+unbp
+head
+hand
+hair:1
+hair:2
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Takuya\wulehuoni\wu.xml
+UUNPVagina
+feet001
+qb
+qb3
+hsl
+sl
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\ZaZ-UltimateDataPack\ZaZ - HDT\ZaZAnkleChainsRagDolls.xml
+AnkleCuffs
+Wood Chains X
+
+F:\Skyrim SE\MO2\mods\Melodic Raven - CBBE-TBD-UUNP SE\meshes\Melodic\Raven\cape.xml
+CBBE
+0_Cape:1
+
+F:\Skyrim SE\MO2\mods\PA_Extension_BadEndsRevived_WindHelm_V1.1_SE_AE\Meshes\ZaZ-UltimateDataPack\ZaZ - HDT\ZaZAnkleChainsRagDolls.xml
+AnkleCuffs
+Wood Chains X
+
+F:\Skyrim SE\MO2\mods\PA_Extension_BadEndsRevived_WindHelm_V1.1_SE_AE\Meshes\ZaZ-UltimateDataPack\ZaZ - HDT\ZaZAnkleChainsRagDollsSMP.xml
+AnkleCuffs
+Wood Chains X
+
+F:\Skyrim SE\MO2\mods\Ryan Reos Battle Bunny Akali - CBBE 3BA\meshes\Odd\BunnyAkali\BunnyChoker.xml
+unpb
+BunnyAkali_Choker
+
+F:\Skyrim SE\MO2\mods\Ryan Reos Battle Bunny Akali - CBBE 3BA\meshes\Odd\BunnyAkali\BunnyCrown.xml
+BunnyAkali_RuinedEmblem_Mesh.025
+
+F:\Skyrim SE\MO2\mods\Ryan Reos Battle Bunny Akali - CBBE 3BA\meshes\Odd\BunnyAkali\BunnyEars.xml
+head
+BunnyAkali_Headwear_BunnyEars
+
+F:\Skyrim SE\MO2\mods\Ryan Reos Battle Bunny Akali - CBBE 3BA\meshes\Odd\BunnyAkali\BunnyHair.xml
+unpb
+head
+BunnyAkali_HairPonyTail
+BunnyAkali_Hair
+BunnyAkali_HairTie
+
+F:\Skyrim SE\MO2\mods\Ryan Reos Battle Bunny Akali - CBBE 3BA\meshes\Odd\BunnyAkali\BunnyVeil.xml
+head
+BunnyAkali_Headwear_Veil
+
+F:\Skyrim SE\MO2\mods\Ryan Reos Dark Elf Blader - CBBE 3BA - TBD - BHUNP\meshes\Odd\DarkElfBlader\BladerHair.xml
+head
+unpb
+Hair PonyTail
+Hair Ribbon
+Hair_1
+Hair_2
+Hair_3
+
+F:\Skyrim SE\MO2\mods\Ryan Reos Dark Elf Blader - CBBE 3BA - TBD - BHUNP\meshes\Odd\DarkElfBlader\LowerSkirt.xml
+unpb
+11
+
+F:\Skyrim SE\MO2\mods\Sakura Outfit - CBBE 3BA - TBD - BHUNP\meshes\odd\Sakura\SakuraHair.xml
+head
+unpb
+hand
+a
+b
+c
+
+F:\Skyrim SE\MO2\mods\Sakura Outfit - CBBE 3BA - TBD - BHUNP\meshes\odd\Sakura\TopDress.xml
+unpb
+11
+
+F:\Skyrim SE\MO2\mods\Stoneheart Studio - CBBE - BHUNP\meshes\clothes\StoneheartStudio\StoneheartStudio3BBBSMP (was for SMP strings that are now removed).xml
+CBBE
+upper
+Strings
+
+F:\Skyrim SE\MO2\mods\Stoneheart Studio - CBBE - BHUNP\meshes\clothes\StoneheartStudio\StoneheartStudioSMP (was for SMP strings that are now removed).xml
+CBBE
+upper
+Strings
+
+F:\Skyrim SE\MO2\mods\Ultimate Lingerie Collection 2.0\meshes\clothes\accessoires\zzFoxEars.xml
+Ears
+Fur
+
+F:\Skyrim SE\MO2\mods\Wuhlehoni\meshes\Takuya\wulehuoni\vail.xml
+UUNPVagina
+feet001
+vail
+X1
+
+F:\Skyrim SE\MO2\mods\Wuhlehoni\meshes\Takuya\wulehuoni\wh.xml
+unbp
+head
+hand
+hair:1
+hair:2
+
+F:\Skyrim SE\MO2\mods\Wuhlehoni\meshes\Takuya\wulehuoni\wu.xml
+UUNPVagina
+feet001
+qb
+qb3
+hsl
+sl
+
+F:\Skyrim SE\MO2\mods\ZaZ Animation Pack+ CBBE HDT V.8.0+SEREV3\Meshes\ZaZ-UltimateDataPack\ZaZ - HDT\ZaZAnkleChainsRagDolls.xml
+AnkleCuffs
+Wood Chains X
+
+F:\Skyrim SE\MO2\mods\[COCO] Battle Angels [SE] - CBBE - BHUNP\meshes\Coco_Cloths\BattleAngels\Rektascloak.xml
+bodycol
+kneecol
+kneecol2
+feet
+cloak
+
+F:\Skyrim SE\MO2\mods\[Daymarr] Shadow Knight\meshes\daymarr\Shadow Knight\Cape01.xml
+ColSpine
+ColPelvis
+ColArms
+ColHands
+ColLegs
+ColFeet
+CapeIn
+
+F:\Skyrim SE\MO2\mods\[Daymarr] Shadow Knight\meshes\daymarr\Shadow Knight\HoodWig01.xml
+colWig1
+Hood
+HHcol
+
+F:\Skyrim SE\MO2\mods\[full_inu] Queen Marika's Dress SSE\meshes\hmmWorks\Marika_the_Eternal\Belt.xml
+coll_body_accurate
+QueenMarika_Belt_Chains
+
+F:\Skyrim SE\MO2\mods\[full_inu] Queen Marika's Dress SSE\meshes\hmmWorks\Marika_the_Eternal\Dress.xml
+coll_body_accurate
+coll_skirt
+
+F:\Skyrim SE\MO2\mods\[full_inu] Queen Marika's Dress SSE\meshes\hmmWorks\Marika_the_Eternal\Hair.xml
+coll_body
+coll_head
+coll_hair
+coll_braid
+QueenMarika_Hair_Front_Single
+QueenMarika_Hair_Side_Single
+QueenMarika_Hair_Top_Single
+
+F:\Skyrim SE\MO2\mods\[Melodic] Bikini Armor\meshes\Melodic\Bikini Armor\body.xml
+CBBEB
+0_Body
+
+F:\Skyrim SE\MO2\mods\[Melodic] Bikini Armor\meshes\Melodic\Bikini Armor\helm.xml
+0_Helm
+CBBE
+
+F:\Skyrim SE\MO2\mods\[Melodic] Gypsy Love 3BA\meshes\Melodic\Gypsy Love\skirt.xml
+CBBE
+skirt
+
+F:\Skyrim SE\MO2\mods\[Melodic] Private Melody SE 3BA\meshes\Melodic\Private Melody\skirt.xml
+CBBE
+skirt
+
+F:\Skyrim SE\MO2\mods\[Melodic] Sexy Medieval Armor SE 3BA\meshes\Melodic\Sexy Medieval Armor\Helm.xml
+1_Armbands
+
+F:\Skyrim SE\MO2\mods\[Melodic] Sexy Medieval Armor SE 3BA\meshes\Melodic\Sexy Medieval Armor\Jaw.xml
+1_Armbands
+
+F:\Skyrim SE\MO2\mods\[NINI] Ananta\meshes\ninistuff\Ananta\hm.xml
+unbp
+head
+hand
+groupname
+
+F:\Skyrim SE\MO2\mods\[NINI] Ananta cbbe\meshes\ninistuff\Ananta\hm.xml
+unbp
+head
+hand
+groupname
+
+F:\Skyrim SE\MO2\mods\[NINI] Bless 0022\meshes\ninistuff\Bless 0022\outfit.xml
+vbody
+cuirass
+
+F:\Skyrim SE\MO2\mods\[SunJeong] Ninirim Collection 5.0\meshes\ninistuff\Ananta\hm.xml
+unbp
+head
+hand
+groupname
+
+F:\Skyrim SE\MO2\mods\[SunJeong] Ninirim Collection 5.0\meshes\ninistuff\Damaged Feather\featherupper.xml
+CBBE
+upper
+
+F:\Skyrim SE\MO2\mods\[SunJeong] Ninirim Collection 5.0\meshes\ninistuff\DragonRises\armor.xml
+CBBE
+armor1
+armor2
+armor3
+
+F:\Skyrim SE\MO2\mods\[SunJeong] Ninirim Collection 5.0\meshes\ninistuff\Summer Casual\summer.xml
+CBBE
+lower1
+lower2
+
+F:\Skyrim SE\MO2\mods\CBBE 3BBB\Meshes\actors\character\character assets\CUSTOM CBBE SMP.xml
+Baseshape
+Labia
+
+F:\Skyrim SE\MO2\mods\CBBE 3BBB_backup\Meshes\actors\character\character assets\CUSTOM CBBE SMP.xml
+Baseshape
+Labia
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\actors\character\character assets\CUSTOM CBBE SMP.xml
+Baseshape
+Labia
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Armor\BDOR Mountain Spirit\xml\head.xml
+Body
+Hair1
+Hair2
+Hair3
+HeadCloak
+HeadCloak2
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Armor\Lgmt\HakuWeddingDress\3Bhaku.xml
+gang
+Baseshape
+dressL
+dressR
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Armor\Lgmt\HakuWeddingDress\haku.xml
+gang
+dressL
+dressR
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Armor\Lgmt\HakuWeddingDress\haku3BA.xml
+gang
+dressL
+dressR
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\Armor\Lgmt\HakuWeddingDress\hakuh.xml
+ColBody
+mantilla
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\MHW\Velkhana\am\tail.xml
+VSkirt
+tail
+
+F:\Skyrim SE\MO2\mods\Haku WeddingDress SE CBBE SMP\meshes\armor\Lgmt\HakuWeddingDress\3Bhaku.xml
+gang
+Baseshape
+dressL
+dressR
+
+F:\Skyrim SE\MO2\mods\Haku WeddingDress SE CBBE SMP\meshes\armor\Lgmt\HakuWeddingDress\haku.xml
+gang
+dressL
+dressR
+
+F:\Skyrim SE\MO2\mods\Haku WeddingDress SE CBBE SMP\meshes\armor\Lgmt\HakuWeddingDress\haku3BA.xml
+gang
+dressL
+dressR
+
+F:\Skyrim SE\MO2\mods\Haku WeddingDress SE CBBE SMP\meshes\armor\Lgmt\HakuWeddingDress\hakuh.xml
+ColBody
+mantilla
+
+F:\Skyrim SE\MO2\mods\MHW_VelkhanaRe\meshes\MHW\Velkhana\am\tail.xml
+VSkirt
+tail
+
+F:\Skyrim SE\MO2\mods\[SE] BDOR Mountain Spirit\Meshes\armor\BDOR Mountain Spirit\xml\head.xml
+Body
+Hair1
+Hair2
+Hair3
+HeadCloak
+HeadCloak2
+
+F:\Skyrim SE\MO2\mods\[SE] BDOR Mountain Spirit skimpy\Meshes\armor\BDOR Mountain Spirit\xml\head.xml
+Body
+Hair1
+Hair2
+Hair3
+HeadCloak
+HeadCloak2
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\SC\2_Clothes\35_SunPrince\M\cape.xml
+SamBody
+B_Cape
+
+F:\Skyrim SE\MO2\mods\DM-Dynamic-Armors\meshes\SC\2_Clothes\35_SunPrince\M\dressm.xml
+SAMBody
+A_Dress
+
+F:\Skyrim SE\MO2\mods\SC - SunPrince smp.ver- SE\meshes\SC\2_Clothes\35_SunPrince\M\cape.xml
+SamBody
+B_Cape
+
+F:\Skyrim SE\MO2\mods\SC - SunPrince smp.ver- SE\meshes\SC\2_Clothes\35_SunPrince\M\dressm.xml
+SAMBody
+A_Dress
+
+**************************
+* MISSING BODIES SUMMARY *
+**************************
+
+0_Body
+0_Cape:1
+0_Helm
+1_Armbands
+11
+a
+A_Dress
+AnalPlug006_Material
+AnkleCuffs
+armor1
+armor2
+armor3
+b
+B_Cape
+Baseshape
+BDO_Ran_2_cuirass_1
+BDO_Ran_2_cuirass_2
+BDO_Ran_2_cuirassMet
+Body
+bodycol
+Bow_Materialpony
+BunnyAkali_Choker
+BunnyAkali_Hair
+BunnyAkali_HairPonyTail
+BunnyAkali_HairTie
+BunnyAkali_Headwear_BunnyEars
+BunnyAkali_Headwear_Veil
+BunnyAkali_RuinedEmblem_Mesh.025
+c
+CapeIn
+CBBE
+CBBEB
+Chain
+cloak
+ColArms
+ColBody
+ColFeet
+ColHands
+coll_body
+coll_body_accurate
+coll_braid
+coll_hair
+coll_head
+coll_skirt
+ColLegs
+ColPelvis
+ColSpine
+colWig1
+cuirass
+dressL
+dressR
+Ears
+feet
+feet001
+Fur
+gang
+groupname
+Hair PonyTail
+Hair Ribbon
+Hair_1
+Hair_2
+Hair_3
+hair:1
+hair:2
+Hair1
+Hair2
+Hair3
+hand
+head
+HeadCloak
+HeadCloak2
+HHcol
+Hood
+hsl
+kneecol
+kneecol2
+Labia
+lower1
+lower2
+mantilla
+PearAnal
+qb
+qb3
+QueenMarika_Belt_Chains
+QueenMarika_Hair_Front_Single
+QueenMarika_Hair_Side_Single
+QueenMarika_Hair_Top_Single
+SamBody
+SAMBody
+Skirt
+skirt
+sl
+Strings
+tail
+unbp
+unpb
+upper
+UUNPVagina
+vail
+vbody
+verhSunJeongHiPoly
+VSkirt
+Wood Chains X
+X1
+yukataSunJeongHiPoly

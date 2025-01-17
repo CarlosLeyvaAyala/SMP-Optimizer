@@ -1,5 +1,4 @@
-﻿[<AutoOpen>]
-module Ops
+﻿namespace Ops
 
 open System.IO
 open DMLib

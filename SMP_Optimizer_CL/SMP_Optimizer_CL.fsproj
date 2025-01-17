@@ -36,6 +36,7 @@
     <Compile Include="CmdLine\Core.fs" />
     <Compile Include="Display.fs" />
     <Compile Include="Optimize.fs" />
+    <Compile Include="Analize.fs" />
     <Compile Include="Program.fs" />
     <None Include="scratchpad.fsx" />
   </ItemGroup>
